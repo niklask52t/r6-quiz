@@ -466,6 +466,7 @@ function newRoundStart() {
 function resetGame() {
   if (confirm('Komplett zurücksetzen? Alles wird zurückgesetzt und es geht zum Intro.')) {
     quizStarted = false;
+    explainIndex = -1;
     clearHistoryLog();
     socket.emit('resetGame');
   }

@@ -1203,6 +1203,41 @@ body {
   50% { transform: scale(1.1); }
 }
 
+/* ---- RISIKO BADGE ---- */
+.risiko-badge {
+  font-family: 'Teko', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ff1744;
+  background: rgba(255,23,68,0.15);
+  border: 2px solid #ff1744;
+  padding: 2px 14px;
+  border-radius: 4px;
+  animation: risikoPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes risikoPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,23,68,0.3); }
+  50% { transform: scale(1.08); box-shadow: 0 0 30px rgba(255,23,68,0.5); }
+}
+
+.risiko-activate {
+  animation: risikoActivate 1.2s ease-out !important;
+}
+
+@keyframes risikoActivate {
+  0% { transform: scale(0.2) rotate(30deg); opacity: 0; }
+  25% { transform: scale(2) rotate(-10deg); opacity: 1; box-shadow: 0 0 60px rgba(255,23,68,0.8); }
+  50% { transform: scale(0.8) rotate(5deg); }
+  75% { transform: scale(1.15) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.joker-risiko {
+  color: #ff1744 !important;
+  border-color: rgba(255,23,68,0.3) !important;
+}
+
 /* ---- QUESTION BODY ---- */
 .question-body {
   display: flex;

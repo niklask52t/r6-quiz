@@ -4,8 +4,6 @@ let gameState = null;
 let questionsData = null;
 let totalQuestions = 0;
 
-// Slide flow
-const slideOrder = ['intro', 'players', 'howToPlay'];
 let quizStarted = false;
 
 // ---- SOCKET EVENTS ----
@@ -116,7 +114,6 @@ function updateUI() {
   } else if (gameState.phase === 'idle' || gameState.phase === 'playerSelect' || gameState.phase === 'specialIntro') {
     if (!quizStarted) {
       slideControls.classList.remove('hidden');
-      updateSlideHint();
     } else {
       autoControls.classList.remove('hidden');
       updateAutoButton();
@@ -179,16 +176,23 @@ function updateJokerButtons() {
   const btnSkip = document.getElementById('btn-skip');
   const btnDouble = document.getElementById('btn-double');
 
+  const btnRisiko = document.getElementById('btn-risiko');
+
   btn5050.disabled = !p.jokers || !p.jokers.fiftyFifty || gameState.hiddenAnswers.length > 0;
   btnSkip.disabled = !p.jokers || !p.jokers.skip;
-  btnDouble.disabled = !p.jokers || !p.jokers.doublePts || gameState.doubleActive;
+  btnDouble.disabled = !p.jokers || !p.jokers.doublePts || gameState.doubleActive || gameState.risikoActive;
+  btnRisiko.disabled = !p.jokers || !p.jokers.risiko || gameState.risikoActive || gameState.doubleActive;
 
   btn5050.classList.toggle('joker-used', !p.jokers || !p.jokers.fiftyFifty);
   btnSkip.classList.toggle('joker-used', !p.jokers || !p.jokers.skip);
   btnDouble.classList.toggle('joker-used', !p.jokers || !p.jokers.doublePts);
+  btnRisiko.classList.toggle('joker-used', !p.jokers || !p.jokers.risiko);
 
   if (gameState.doubleActive) btnDouble.classList.add('joker-active');
   else btnDouble.classList.remove('joker-active');
+
+  if (gameState.risikoActive) btnRisiko.classList.add('joker-active');
+  else btnRisiko.classList.remove('joker-active');
 }
 
 function updateQuestionsRemaining() {
@@ -196,33 +200,15 @@ function updateQuestionsRemaining() {
   document.getElementById('questions-remaining').textContent = `${totalQuestions - used}/${totalQuestions}`;
 }
 
-// ---- SLIDE NAVIGATION ----
-function nextSlide() {
+// ---- START GAME ----
+function startGame() {
   if (!gameState) return;
-  const currentIdx = slideOrder.indexOf(gameState.screen);
-  if (currentIdx >= 0 && currentIdx < slideOrder.length - 1) {
-    setScreen(slideOrder[currentIdx + 1]);
-  } else {
-    quizStarted = true;
-    socket.emit('startCountdown');
+  if (gameState.players.length === 0) {
+    alert('Füge erst Spieler hinzu!');
+    return;
   }
-}
-
-function updateSlideHint() {
-  const hint = document.getElementById('slide-hint');
-  const btn = document.getElementById('btn-next-slide');
-  if (!hint || !btn || !gameState) return;
-
-  const currentIdx = slideOrder.indexOf(gameState.screen);
-  const labels = ['Intro', 'Spieler', 'Regeln'];
-
-  if (currentIdx >= 0 && currentIdx < slideOrder.length - 1) {
-    btn.textContent = '▶ NÄCHSTE FOLIE';
-    hint.textContent = labels.map((l, i) => i === currentIdx ? `[${l}]` : l).join(' → ') + ' → Quiz';
-  } else {
-    btn.textContent = '🎮 QUIZ STARTEN';
-    hint.textContent = 'Alle Folien durch — bereit zum Spielen!';
-  }
+  quizStarted = true;
+  socket.emit('startCountdown');
 }
 
 // ---- ACTIONS ----
@@ -233,6 +219,7 @@ function endRound() { socket.emit('endRound'); }
 function useFiftyFifty() { socket.emit('useFiftyFifty'); }
 function useSkip() { socket.emit('useSkip'); }
 function useDoublePts() { socket.emit('useDoublePts'); }
+function useRisiko() { socket.emit('useRisiko'); }
 function setScreen(screen) { socket.emit('setScreen', screen); }
 
 // ---- PLAYER MANAGEMENT ----
@@ -261,6 +248,7 @@ function renderPlayerList() {
     if (p.jokers.fiftyFifty) jokers.push('<span class="joker-badge">½</span>');
     if (p.jokers.skip) jokers.push('<span class="joker-badge">⟳</span>');
     if (p.jokers.doublePts) jokers.push('<span class="joker-badge">×2</span>');
+    if (p.jokers.risiko) jokers.push('<span class="joker-badge" style="color:#ff1744">💀</span>');
     const jokersHtml = jokers.length > 0 ? jokers.join('') : '<span class="no-jokers">keine</span>';
 
     return `

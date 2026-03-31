@@ -146,6 +146,12 @@ function renderQuestion(state, prefix) {
   const doubleBadge = document.getElementById(`${prefix === 'q' ? 'q' : 'r'}-double-badge`);
   if (doubleBadge) doubleBadge.classList.toggle('hidden', !state.doubleActive);
 
+  // Risiko badge
+  if (prefix === 'q') {
+    const risikoBadge = document.getElementById('q-risiko-badge');
+    if (risikoBadge) risikoBadge.classList.toggle('hidden', !state.risikoActive);
+  }
+
   // Difficulty badge (question screen only)
   if (prefix === 'q') {
     const diffBadge = document.getElementById('q-diff-badge');
@@ -236,6 +242,7 @@ function renderJokerDisplay(player) {
   if (player.jokers.fiftyFifty) jokers.push('<span class="joker-tag">50/50</span>');
   if (player.jokers.skip) jokers.push('<span class="joker-tag">SKIP</span>');
   if (player.jokers.doublePts) jokers.push('<span class="joker-tag">×2</span>');
+  if (player.jokers.risiko) jokers.push('<span class="joker-tag joker-risiko">RISIKO</span>');
   container.innerHTML = jokers.length > 0 ? `JOKER: ${jokers.join(' ')}` : '';
 }
 
@@ -256,16 +263,27 @@ function showResultBanner(data) {
     screenFlash('rgba(255,234,0,0.3)');
   } else if (data.isCorrect) {
     banner.classList.add('banner-correct');
-    bannerText.textContent = 'RICHTIG!';
+    bannerText.textContent = data.risikoActive ? 'RISIKO GEWONNEN!' : 'RICHTIG!';
     const ptsText = data.pointsAwarded ? `+${data.pointsAwarded} PUNKTE` : '+1 PUNKT';
     bannerSub.textContent = `${data.player.name} ${ptsText}`;
     screenFlash('rgba(0,230,118,0.25)');
-    spawnParticles(960, 300, 40, '#00e676', 200);
+    spawnParticles(960, 300, data.risikoActive ? 80 : 40, '#00e676', data.risikoActive ? 350 : 200);
+    if (data.risikoActive) {
+      spawnParticles(960, 300, 40, '#ffea00', 250);
+      screenFlash('rgba(255,234,0,0.3)', 600);
+    }
   } else {
     banner.classList.add('banner-wrong');
-    bannerText.textContent = 'FALSCH!';
-    bannerSub.textContent = data.stealPending ? 'STEAL CHANCE...' : `Richtig wäre: ${data.correctAnswerText}`;
-    screenFlash('rgba(255,23,68,0.25)');
+    if (data.risikoActive && data.risikoLost > 0) {
+      bannerText.textContent = 'RISIKO VERLOREN!';
+      bannerSub.textContent = data.stealPending ? 'STEAL CHANCE...' : `${data.player.name} -${data.risikoLost} PUNKTE! Richtig: ${data.correctAnswerText}`;
+      screenFlash('rgba(255,23,68,0.4)', 600);
+      spawnParticles(960, 300, 60, '#ff1744', 300);
+    } else {
+      bannerText.textContent = 'FALSCH!';
+      bannerSub.textContent = data.stealPending ? 'STEAL CHANCE...' : `Richtig wäre: ${data.correctAnswerText}`;
+      screenFlash('rgba(255,23,68,0.25)');
+    }
   }
 }
 
@@ -760,6 +778,42 @@ function animateJokerDouble() {
   }
 }
 
+function animateJokerRisiko() {
+  // Dramatic red/black flash — danger!
+  screenFlash('rgba(255,23,68,0.5)', 400);
+  setTimeout(() => screenFlash('rgba(0,0,0,0.4)', 300), 200);
+  setTimeout(() => screenFlash('rgba(255,23,68,0.3)', 300), 500);
+
+  spawnGlitchLines();
+  spawnGlitchLines();
+
+  const qScreen = document.getElementById('screen-question');
+  qScreen.classList.add('screen-shake');
+  setTimeout(() => qScreen.classList.remove('screen-shake'), 800);
+
+  // Skull particles from center
+  for (let i = 0; i < 6; i++) {
+    setTimeout(() => {
+      spawnParticles(960, 540, 15, '#ff1744', 300);
+      spawnParticles(960, 540, 10, '#ff6600', 200);
+    }, i * 100);
+  }
+
+  // Edge danger bursts
+  spawnParticles(100, 540, 20, '#ff1744', 100);
+  spawnParticles(1820, 540, 20, '#ff1744', 100);
+  spawnParticles(960, 50, 20, '#ff1744', 100);
+  spawnParticles(960, 1030, 20, '#ff1744', 100);
+
+  // Show risiko badge
+  const badge = document.getElementById('q-risiko-badge');
+  if (badge) {
+    badge.classList.remove('hidden');
+    badge.classList.add('risiko-activate');
+    setTimeout(() => badge.classList.remove('risiko-activate'), 1200);
+  }
+}
+
 // =============================================
 // STEAL UI
 // =============================================
@@ -849,6 +903,8 @@ socket.on('jokerUsed', ({ type, hiddenAnswers }) => {
     animateJokerSkip();
   } else if (type === 'doublePts') {
     animateJokerDouble();
+  } else if (type === 'risiko') {
+    animateJokerRisiko();
   }
 });
 

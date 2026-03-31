@@ -23,12 +23,12 @@
     <section class="panel panel-highlight">
       <h2>🚀 Quiz Steuerung</h2>
 
-      <!-- Slide Navigation (pre-quiz) -->
+      <!-- Start Game (pre-quiz) -->
       <div id="slide-controls">
-        <button onclick="nextSlide()" class="btn btn-big btn-accent" id="btn-next-slide">
-          ▶ NÄCHSTE FOLIE
+        <button onclick="startGame()" class="btn btn-big btn-accent" id="btn-start-game">
+          🎮 SPIEL BEGINNEN
         </button>
-        <p class="hint" id="slide-hint">Intro → Spieler → Regeln → Quiz</p>
+        <p class="hint">Spieler hinzufügen, dann Spiel starten!</p>
       </div>
 
       <!-- Next Round (during quiz) -->
@@ -59,6 +59,7 @@
           <button onclick="useFiftyFifty()" class="btn btn-joker" id="btn-5050">½ 50/50</button>
           <button onclick="useSkip()" class="btn btn-joker" id="btn-skip">⟳ SKIP</button>
           <button onclick="useDoublePts()" class="btn btn-joker" id="btn-double">×2 DOPPELT</button>
+          <button onclick="useRisiko()" class="btn btn-joker btn-joker-risiko" id="btn-risiko">💀 RISIKO</button>
         </div>
 
         <p class="answer-prompt">Welche Antwort hat der Spieler gewählt?</p>

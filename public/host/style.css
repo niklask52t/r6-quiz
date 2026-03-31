@@ -486,6 +486,27 @@ details.panel[open] summary h2 {
   50% { box-shadow: 0 0 24px rgba(255, 234, 0, 0.5); }
 }
 
+.btn-joker-risiko {
+  background: rgba(255, 23, 68, 0.1);
+  border-color: #ff1744;
+  color: #ff1744;
+}
+
+.btn-joker-risiko:hover:not(:disabled) {
+  background: rgba(255, 23, 68, 0.2);
+}
+
+.btn-joker-risiko.joker-active {
+  background: rgba(255, 23, 68, 0.3);
+  box-shadow: 0 0 12px rgba(255, 23, 68, 0.4);
+  animation: pulseRisiko 0.5s ease-in-out infinite;
+}
+
+@keyframes pulseRisiko {
+  0%, 100% { box-shadow: 0 0 12px rgba(255, 23, 68, 0.3); }
+  50% { box-shadow: 0 0 24px rgba(255, 23, 68, 0.6); }
+}
+
 /* ---- ANSWER HIDDEN (50/50) ---- */
 .btn-answer.answer-hidden {
   opacity: 0.15;

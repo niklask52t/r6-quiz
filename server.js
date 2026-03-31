@@ -80,6 +80,7 @@ let gameState = {
   stealPlayer: null,         // who can steal
   stealActive: false,
   stealPending: false,       // true = answer not yet fully revealed (hide correct for steal)
+  risikoActive: false,       // risiko joker active
   // Difficulty tracking per player: { playerId: { easy: N, medium: N, hard: N, expert: N } }
   difficultyTracker: {},
   // Special tracking per player: { playerId: { blitz: N, hardcore: N, steal: N } }
@@ -139,8 +140,19 @@ function handleTimeout() {
   gameState.stealPending = isSteal;
 
   const correctText = gameState.currentQuestion.answers[gameState.currentQuestion.correct];
-  const gameOver = checkGameOver();
 
+  // Risiko penalty on timeout too
+  let risikoLost = 0;
+  if (gameState.risikoActive && gameState.selectedPlayer) {
+    const player = gameState.players.find(p => p.id === gameState.selectedPlayer.id);
+    if (player) {
+      risikoLost = Math.floor(player.score / 2);
+      player.score -= risikoLost;
+      gameState.selectedPlayer = { ...player };
+    }
+  }
+
+  const gameOver = checkGameOver();
   addHistory(gameState.selectedPlayer, false, true, correctText);
 
   io.emit('answerResult', {
@@ -151,6 +163,8 @@ function handleTimeout() {
     timedOut: true,
     player: gameState.selectedPlayer,
     specialType: gameState.specialType,
+    risikoActive: gameState.risikoActive,
+    risikoLost,
     stealPending: isSteal,
   });
   io.emit('stateUpdate', sanitizeState());
@@ -368,6 +382,7 @@ function activateQuestion(q, specialType) {
   gameState.revealedAnswer = false;
   gameState.hiddenAnswers = [];
   gameState.doubleActive = false;
+  gameState.risikoActive = false;
   gameState.specialType = specialType || null;
   gameState.stealActive = false;
   gameState.stealPlayer = null;
@@ -410,6 +425,9 @@ function calculatePoints(question, specialType) {
   // Double joker
   if (gameState.doubleActive) pts *= 2;
 
+  // Risiko joker — triple points
+  if (gameState.risikoActive) pts *= 3;
+
   return Math.round(pts);
 }
 
@@ -443,7 +461,7 @@ io.on('connection', (socket) => {
       name: name,
       score: 0,
       playCount: 0,
-      jokers: { fiftyFifty: true, skip: true, doublePts: true },
+      jokers: { fiftyFifty: true, skip: true, doublePts: true, risiko: true },
     };
     gameState.players.push(player);
     gameState.difficultyTracker[player.id] = { easy: 0, medium: 0, hard: 0, expert: 0 };
@@ -665,11 +683,23 @@ io.on('connection', (socket) => {
     gameState.revealedAnswer = !isSteal;
     gameState.stealPending = isSteal;
 
+    const pts = calculatePoints(gameState.currentQuestion, gameState.specialType);
+    let pointsAwarded = 0;
+    let risikoLost = 0;
+
     if (isCorrect && gameState.selectedPlayer) {
       const player = gameState.players.find(p => p.id === gameState.selectedPlayer.id);
       if (player) {
-        const pts = calculatePoints(gameState.currentQuestion, gameState.specialType);
         player.score += pts;
+        pointsAwarded = pts;
+        gameState.selectedPlayer = { ...player };
+      }
+    } else if (!isCorrect && gameState.risikoActive && gameState.selectedPlayer) {
+      // Risiko penalty: lose half your score
+      const player = gameState.players.find(p => p.id === gameState.selectedPlayer.id);
+      if (player) {
+        risikoLost = Math.floor(player.score / 2);
+        player.score -= risikoLost;
         gameState.selectedPlayer = { ...player };
       }
     }
@@ -677,7 +707,6 @@ io.on('connection', (socket) => {
     const gameOver = checkGameOver();
     addHistory(gameState.selectedPlayer, isCorrect, false, correctText);
 
-    const pts = calculatePoints(gameState.currentQuestion, gameState.specialType);
     io.emit('answerResult', {
       chosenAnswer: answerIndex,
       correctAnswer: isSteal ? -1 : gameState.currentQuestion.correct,
@@ -686,8 +715,10 @@ io.on('connection', (socket) => {
       timedOut: false,
       player: gameState.selectedPlayer,
       doubleActive: gameState.doubleActive,
+      risikoActive: gameState.risikoActive,
       specialType: gameState.specialType,
-      pointsAwarded: isCorrect ? pts : 0,
+      pointsAwarded,
+      risikoLost,
       stealPending: isSteal,
     });
     io.emit('stateUpdate', sanitizeState());
@@ -783,6 +814,20 @@ io.on('connection', (socket) => {
     io.emit('stateUpdate', sanitizeState());
   });
 
+  socket.on('useRisiko', () => {
+    if (gameState.phase !== 'answering' || !gameState.currentQuestion || !gameState.selectedPlayer) return;
+    const player = gameState.players.find(p => p.id === gameState.selectedPlayer.id);
+    if (!player || !player.jokers.risiko) return;
+    if (gameState.risikoActive || gameState.doubleActive) return;
+
+    player.jokers.risiko = false;
+    gameState.selectedPlayer = { ...player };
+    gameState.risikoActive = true;
+
+    io.emit('jokerUsed', { type: 'risiko', playerId: player.id });
+    io.emit('stateUpdate', sanitizeState());
+  });
+
   // ============================================
   // MANUAL OVERRIDES
   // ============================================
@@ -844,7 +889,7 @@ io.on('connection', (socket) => {
       screen: 'scoreboard',
       players: gameState.players.map(p => ({
         ...p, score: 0, playCount: 0,
-        jokers: { fiftyFifty: true, skip: true, doublePts: true },
+        jokers: { fiftyFifty: true, skip: true, doublePts: true, risiko: true },
       })),
       currentQuestion: null,
       currentQuestionIndex: -1,
@@ -865,6 +910,7 @@ io.on('connection', (socket) => {
       stealPlayer: null,
       stealActive: false,
       stealPending: false,
+      risikoActive: false,
       difficultyTracker: {},
       specialTracker: {},
       history: [],
@@ -888,7 +934,7 @@ io.on('connection', (socket) => {
       screen: 'intro',
       players: gameState.players.map(p => ({
         ...p, score: 0, playCount: 0,
-        jokers: { fiftyFifty: true, skip: true, doublePts: true },
+        jokers: { fiftyFifty: true, skip: true, doublePts: true, risiko: true },
       })),
       currentQuestion: null,
       currentQuestionIndex: -1,
@@ -909,6 +955,7 @@ io.on('connection', (socket) => {
       stealPlayer: null,
       stealActive: false,
       stealPending: false,
+      risikoActive: false,
       difficultyTracker: {},
       specialTracker: {},
       history: [],

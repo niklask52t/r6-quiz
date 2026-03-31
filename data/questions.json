@@ -1,0 +1,996 @@
+{
+  "categories": [
+    {
+      "name": "Operators",
+      "icon": "👤",
+      "questions": [
+        {
+          "question": "Welcher Operator hat die Fähigkeit 'Black Eye'?",
+          "image": null,
+          "answers": ["Valkyrie", "Maestro", "Echo", "Mozzie"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Operator kann Löcher in verstärkte Wände schmelzen?",
+          "image": null,
+          "answers": ["Thermite", "Maverick", "Hibana", "Ace"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viele Armor-Platten hat Rook in seinem Gadget?",
+          "image": null,
+          "answers": ["3", "5", "10", "Für jedes Teammitglied eine"],
+          "correct": 3,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Aus welchem Land kommt der Operator 'Vigil'?",
+          "image": null,
+          "answers": ["Japan", "Südkorea", "China", "Nordkorea"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Operator kann durch Rauch sehen?",
+          "image": null,
+          "answers": ["Nur Warden", "Nur Glaz", "Warden und Glaz", "Keiner"],
+          "correct": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wie viele Grzmot Mines hat Ela?",
+          "image": null,
+          "answers": ["2", "3", "4", "5"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie heißt Thermites Gadget offiziell?",
+          "image": null,
+          "answers": ["Exothermic Charge", "Brimstone BC-3", "Breaching Charge X", "Thermite Charge"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator ist KEIN 3-Speed?",
+          "image": null,
+          "answers": ["Ash", "Bandit", "IQ", "Sledge"],
+          "correct": 3,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welche Operatorin ist die Schwester von Ela?",
+          "image": null,
+          "answers": ["Zofia", "Iana", "Frost", "Alibi"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie heißt der Operator, der Hologramme von sich selbst erstellen kann?",
+          "image": null,
+          "answers": ["Alibi", "Iana", "Nøkk", "Vigil"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "In welchem Jahr wurde Tachanka (Alexsandr Senaviev) laut Lore geboren?",
+          "image": null,
+          "answers": ["1957", "1967", "1972", "1980"],
+          "correct": 1,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Welcher Operator hat den echten Namen 'Elżbieta Bosak'?",
+          "image": null,
+          "answers": ["Ela", "Zofia", "Iana", "Frost"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Wie heißt Caveiras Verhör-Fähigkeit?",
+          "image": null,
+          "answers": ["Interrogation", "Silent Step", "Luison", "Shadow Stalker"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator wurde als LETZTER zur GIGN hinzugefügt?",
+          "image": null,
+          "answers": ["Lion", "Montagne", "Doc", "Rook"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator kann Drohnen hacken und übernehmen?",
+          "image": null,
+          "answers": ["Mute", "Mozzie", "Vigil", "Echo"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viele Operator hatte Rainbow Six Siege zum Release?",
+          "image": null,
+          "answers": ["10", "16", "20", "24"],
+          "correct": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator hat eine Augenklappe?",
+          "image": null,
+          "answers": ["Capitão", "Blackbeard", "Maestro", "Kali"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Operator ist laut Lore der älteste im Team Rainbow?",
+          "image": null,
+          "answers": ["Thatcher", "Kaid", "Zero (Sam Fisher)", "Tachanka"],
+          "correct": 2,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Aus welchem Videospiel stammt der Operator 'Zero'?",
+          "image": null,
+          "answers": ["Ghost Recon", "Splinter Cell", "The Division", "Far Cry"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wie viele Prisma-Hologramme kann Alibi aufstellen?",
+          "image": null,
+          "answers": ["2", "3", "4", "5"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Defender kann Angreifer-Gadgets mit seinem Gadget recyceln?",
+          "image": null,
+          "answers": ["Jäger", "Wamai", "Aruni", "Azami"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was passiert, wenn man auf ein Alibi-Hologramm schießt?",
+          "image": null,
+          "answers": ["Es verschwindet", "Spieler wird 5 Sek. markiert", "Nichts", "Alibi bekommt einen Ping"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator war ursprünglich in der Alpha als Attacker geplant, wurde aber zum Defender?",
+          "image": null,
+          "answers": ["Jäger", "Frost", "Tachanka", "Smoke"],
+          "correct": 3,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Welcher Operator hat den Spitznamen 'Lord' in der Community?",
+          "image": null,
+          "answers": ["Montagne", "Tachanka", "Fuze", "Blitz"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie heißt Dokkaebi's Hacking-Gerät offiziell?",
+          "image": null,
+          "answers": ["Logic Bomb", "Cyber Attack", "Phone Hack", "Signal Disruptor"],
+          "correct": 0,
+          "difficulty": "hard"
+        }
+      ]
+    },
+    {
+      "name": "Maps",
+      "icon": "🗺️",
+      "questions": [
+        {
+          "question": "Welche Map hat einen Boxring?",
+          "image": null,
+          "answers": ["Theme Park", "Tower", "Fortress", "Outback"],
+          "correct": 1,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Auf welcher Map gibt es ein Aquarium?",
+          "image": null,
+          "answers": ["Coastline", "Villa", "Lair", "Theme Park"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welche Map spielt in Brasilien?",
+          "image": null,
+          "answers": ["Coastline", "Favela", "Villa", "Border"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "In welchem Land spielt die Map 'Kafe Dostoyevsky'?",
+          "image": null,
+          "answers": ["Russland", "Ukraine", "Polen", "Tschechien"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viele Stockwerke hat das Haus auf der Map 'House'?",
+          "image": null,
+          "answers": ["2", "3 (inkl. Keller)", "4", "1"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welche Map wurde komplett reworked und hat danach einen Vergnügungspark-Abschnitt?",
+          "image": null,
+          "answers": ["Theme Park", "Hereford Base", "House", "Favela"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Auf welcher Map findet man einen Drogenlabor-Raum?",
+          "image": null,
+          "answers": ["Theme Park", "Favela", "Clubhouse", "Border"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welche Map hat den Callout 'Geisha Room'?",
+          "image": null,
+          "answers": ["Skyscraper", "Tower", "Theme Park", "Coastline"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welche Map spielt auf einem Flugzeug?",
+          "image": null,
+          "answers": ["Plane", "Tower", "Border", "Yacht"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie heißt der Raum mit der Schneekugel-Sammlung auf Villa?",
+          "image": null,
+          "answers": ["Trophy Room", "Games Room", "Aviator Room", "Library"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welche Map hat KEINE zerstörbaren Böden?",
+          "image": null,
+          "answers": ["Plane", "Bartlett University", "Presidential Plane", "Alle Maps haben zerstörbare Böden"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "In welcher Stadt spielt die Map 'Bank'?",
+          "image": null,
+          "answers": ["Los Angeles", "New York", "Chicago", "Washington D.C."],
+          "correct": 0,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Welche Map wurde mit Operation Ember Rise veröffentlicht?",
+          "image": null,
+          "answers": ["Kanal Rework", "Kafe Rework", "Theme Park Rework", "Keine neue Map"],
+          "correct": 1,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Auf welcher Map gibt es die Callouts 'Blue Bar' und 'Sunrise Bar'?",
+          "image": null,
+          "answers": ["Coastline", "Kafe", "Villa", "Clubhouse"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welche Map spielt in Australien?",
+          "image": null,
+          "answers": ["Outback", "Coastline", "Fortress", "Border"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welche Map hat den Callout 'Pixel Peek' berühmt gemacht?",
+          "image": null,
+          "answers": ["Bank", "Clubhouse", "Consulate", "Oregon"],
+          "correct": 1,
+          "difficulty": "expert"
+        }
+      ]
+    },
+    {
+      "name": "Waffen & Gadgets",
+      "icon": "🔫",
+      "questions": [
+        {
+          "question": "Welche Waffe hat die höchste Feuerrate im Spiel?",
+          "image": null,
+          "answers": ["SMG-12", "Scorpion EVO", "Vector .45 ACP", "C75 Auto"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Wie viele Verstärkungen gibt es im Reinforcement Pool?",
+          "image": null,
+          "answers": ["5", "8", "10", "12"],
+          "correct": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator hat Zugang zum BOSG 12.2?",
+          "image": null,
+          "answers": ["Vigil & Dokka", "Smoke & Mute", "Castle & Pulse", "Ela & Zofia"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was macht der Defuser wenn er gepflanzt wurde und die Zeit abläuft?",
+          "image": null,
+          "answers": ["Attacker gewinnen", "Defender gewinnen", "Unentschieden", "Overtime"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viel Schaden macht ein Headshot in Siege (mit jeder Waffe)?",
+          "image": null,
+          "answers": ["Abhängig von der Waffe", "Immer sofort tot (One-Shot)", "200 Damage", "150 Damage"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welches Gadget kann Bandit-Batterien UND Mute-Jammer zerstören?",
+          "image": null,
+          "answers": ["Thatcher's EMP", "Twitch's Drohne", "Kali's Lanze", "Alle drei"],
+          "correct": 3,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wie viele Schuss hat die BOSG 12.2?",
+          "image": null,
+          "answers": ["1", "2", "5", "8"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist der Unterschied zwischen einer Breach Charge und einer Frag Grenade an einer Wand?",
+          "image": null,
+          "answers": ["Breach macht größeres Loch", "Frag macht größeres Loch", "Gleich groß", "Frag kann keine Wände öffnen"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welche Sekundärwaffe hat den Spitznamen 'Pocket Sniper'?",
+          "image": null,
+          "answers": ["PMM", "LFP586", "Keratos", "Bailiff"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Wie viel HP hat ein Operator mit Rook Armor zusätzlich effektiv?",
+          "image": null,
+          "answers": ["+20 HP", "20% weniger Schaden", "Garantiertes DBNO", "+50 HP"],
+          "correct": 2,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Welches Gadget kann Rauch erzeugen, der Schaden macht?",
+          "image": null,
+          "answers": ["Smoke's Remote Gas", "Capitão's Bolzen", "Beide", "Keins von beiden"],
+          "correct": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was passiert, wenn Mute einen Jammer neben eine verstärkte Wand stellt?",
+          "image": null,
+          "answers": ["Nichts Besonderes", "Hard Breacher können nicht breachen", "Die Wand wird unzerstörbar", "Drohnen werden zerstört"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Aufsatz reduziert den VERTIKALEN Rückstoß am meisten (seit dem Attachment-Rework Y7S3)?",
+          "image": null,
+          "answers": ["Flash Hider", "Compensator", "Muzzle Brake", "Suppressor"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Kann man durch einen Clash-Schild hindurch Schaden machen?",
+          "image": null,
+          "answers": ["Nein, unmöglich", "Ja, mit Meleeing", "Ja, mit Explosives", "Ja, mit Melee und Explosives"],
+          "correct": 3,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Wie viele ADS (Magpie) hat Jäger?",
+          "image": null,
+          "answers": ["2", "3", "4", "1"],
+          "correct": 1,
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "name": "Pro League & Esports",
+      "icon": "🏆",
+      "questions": [
+        {
+          "question": "Welches Team hat die erste Six Invitational gewonnen (2017)?",
+          "image": null,
+          "answers": ["Continuum", "PENTA Sports", "G2 Esports", "Team Liquid"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "In welchem Jahr wurde Rainbow Six Siege released?",
+          "image": null,
+          "answers": ["2014", "2015", "2016", "2017"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie lange dauert eine Ranked-Runde (Action Phase)?",
+          "image": null,
+          "answers": ["3 Minuten", "3:30 Minuten", "4 Minuten", "2:30 Minuten"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welches Team gewann die Six Invitational 2018?",
+          "image": null,
+          "answers": ["G2 Esports", "PENTA Sports", "Evil Geniuses", "FaZe Clan"],
+          "correct": 1,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Was ist der höchste Rang im Ranked-System?",
+          "image": null,
+          "answers": ["Diamond", "Champion", "Grand Master", "Legends"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Pro-Spieler ist bekannt für sein Jäger-Spiel und war bei G2?",
+          "image": null,
+          "answers": ["Pengu", "Fabian", "Kanto", "UUNO"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Wie viele Runden muss man in Ranked gewinnen um das Match zu gewinnen?",
+          "image": null,
+          "answers": ["3", "4", "5", "6"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "In welcher Region war die Pro League historisch am dominantesten?",
+          "image": null,
+          "answers": ["Nordamerika", "Europa", "Lateinamerika", "Asien-Pazifik"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Was bedeutet 'Default Plant' im Pro-League-Kontext?",
+          "image": null,
+          "answers": ["Standard-Defuser-Position auf einer Site", "Default Operator-Setup", "Standard-Angriffsstrategie", "Ohne Drohnenphase planten"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator wurde bei der Six Invitational 2020 am meisten gebannt?",
+          "image": null,
+          "answers": ["Thatcher", "Jackal", "Montagne", "Echo"],
+          "correct": 0,
+          "difficulty": "expert"
+        }
+      ]
+    },
+    {
+      "name": "Taktik & Situationen",
+      "icon": "🧠",
+      "questions": [
+        {
+          "question": "Was bedeutet 'Roaming' in Siege?",
+          "image": null,
+          "answers": ["Als Defender die Site verlassen und flanken", "Als Attacker das Gebäude umrunden", "AFK sein", "Drohnen fahren"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist ein '1-Tap'?",
+          "image": null,
+          "answers": ["Ein Kill mit einem einzigen Schuss", "Einmal antippen zum Peeken", "Eine spezielle Gadget-Technik", "Ein Bug"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was bedeutet der Callout 'Rotate'?",
+          "image": null,
+          "answers": ["Ein Loch zwischen zwei Räumen für Rotation", "Die Map drehen", "Den Operator wechseln", "Die Drohne rotieren lassen"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Situation: Du bist der letzte Defender, 1v1, 20 Sekunden übrig. Der Attacker hat den Defuser NICHT gepflanzt. Was ist die beste Strategie?",
+          "image": null,
+          "answers": ["Zeit absitzen, nicht peeken", "Aggressiv pushen", "Den Defuser suchen", "Aufgeben und sparen"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Situation: Du spielst Thermite und Bandit macht 'Bandit Tricking'. Was ist die beste Gegenmaßnahme?",
+          "image": null,
+          "answers": ["Thatcher werfen und sofort breachen", "Maverick macht ein Loch und zerstört die Batterie", "Einfach warten", "Aufgeben und woanders breachen"],
+          "correct": 1,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Was bedeutet 'Vertical Play' in Siege?",
+          "image": null,
+          "answers": ["Durch Böden/Decken spielen", "Rappelling an der Außenwand", "Von oben nach unten clearen", "Mit Glaz durch Fenster schießen"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Situation: Es ist ein 1v3 als Attacker, 45 Sekunden übrig, Defuser bei dir. Was ist am besten?",
+          "image": null,
+          "answers": ["Sofort auf die Site rushen und planten", "Langsam spielen und Picks suchen", "Schnell planten und Post-Plant spielen", "Default strat spielen"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Was ist ein 'Nitro Cell Kill' durch die Decke?",
+          "image": null,
+          "answers": ["C4 auf den Boden werfen und von unten sprengen", "C4 an die Decke kleben", "C4 durch ein Drone Hole werfen", "Ein Bug exploit"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was bedeutet 'Flank Watch'?",
+          "image": null,
+          "answers": ["Einen Winkel halten um Flanken zu verhindern", "Die Flanke des Gegners studieren", "Ein Operator-Gadget", "Eine bestimmte Drohnenposition"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Situation: Du bist Smoke auf der Site, 30 Sekunden übrig, Attacker müssen noch planten. Wie viele Gas-Canisters solltest du idealerweise noch haben?",
+          "image": null,
+          "answers": ["0, alle schon benutzt", "Mindestens 2", "Alle 3", "1 reicht"],
+          "correct": 1,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Was ist 'Spawn Peeking'?",
+          "image": null,
+          "answers": ["Als Defender zu Rundenbeginn aus dem Fenster auf Attacker schießen", "Den Spawn der Gegner mit Drohne checken", "Schnell zum Spawn laufen", "Ein verbotener Move"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was ist eine 'Mira Strat'?",
+          "image": null,
+          "answers": ["Black Mirror an einer Wand platzieren um dahinter zu sehen", "Eine spezielle Rush-Taktik", "Miras Loadout optimieren", "Eine Esports-Strategie"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Situation: Du spielst als Attacker und siehst eine unbeschädigte Barrikade an einem Fenster. Was sagt dir das?",
+          "image": null,
+          "answers": ["Niemand hat dort gepeekt", "Es könnte ein Frost-Trap unter dem Fenster sein", "Sicher zum reinspringen", "Der Raum ist leer"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist 'Quick Peeking' / 'Jiggle Peeking'?",
+          "image": null,
+          "answers": ["Schnell links-rechts peeken um Info zu sammeln", "Crouch-Spam beim Peeken", "Durch ein Bullet Hole peeken", "ADS während dem Peeken"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Situation: Du hörst Fuze sein Cluster Charge über dir platzieren. Was machst du?",
+          "image": null,
+          "answers": ["Unter dem Gadget stehen bleiben", "Sofort den Raum verlassen", "Zum Fenster rennen", "Schild aufstellen"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was bedeutet 'Anchoring'?",
+          "image": null,
+          "answers": ["Als Defender auf/neben der Site bleiben", "Einen Schild aufstellen", "Sich festhalten an einer Leiter", "Das Schiff verankern auf Yacht"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Situation: Der Gegner hat einen Montagne der in die Site pushed. Was ist die beste Counter-Strategie?",
+          "image": null,
+          "answers": ["Direkt draufschießen", "C4 hinter ihn werfen oder Smoke Gas nutzen", "Wegrennen", "Melee-Spam"],
+          "correct": 1,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Was bedeutet 'Trade Kill'?",
+          "image": null,
+          "answers": ["Sofort den Kill zurückholen wenn ein Teammate stirbt", "Kill gegen Kill tauschen auf Purpose", "Für einen Kill bezahlen", "Einen Kill verschenken"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Situation: Du bist letzter Alive als Defender, Defuser ist gepflanzt, du weißt nicht wo. Was tust du?",
+          "image": null,
+          "answers": ["Auf den Sound des Defusers hören", "Random auf die Site rennen", "Aufgeben", "Drohne suchen"],
+          "correct": 0,
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "name": "Lore & Geschichte",
+      "icon": "📜",
+      "questions": [
+        {
+          "question": "Wie heißt die Organisation, der alle Operator angehören?",
+          "image": null,
+          "answers": ["Team Rainbow", "Six Squad", "CTU Alliance", "Operation Siege"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wer ist 'Six' — der Leiter von Team Rainbow?",
+          "image": null,
+          "answers": ["Harry Pandey (Harishva)", "Sam Fisher", "Ash (Eliza Cohen)", "Thatcher"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator verlor sein Augenlicht auf einem Auge bei einem Einsatz in Angola?",
+          "image": null,
+          "answers": ["Capitão", "Blackbeard", "Kaid", "Maestro"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welche zwei Operator sind Zwillinge?",
+          "image": null,
+          "answers": ["Ela & Zofia", "Flores & Osa", "Iana ist ein Zwilling (ihre Schwester ist verstorben)", "Es gibt keine Zwillinge"],
+          "correct": 2,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Auf welchem Tom Clancy Roman basiert Rainbow Six?",
+          "image": null,
+          "answers": ["Rainbow Six (1998)", "The Hunt for Red October", "Patriot Games", "Clear and Present Danger"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator diente früher bei der Navy SEALs?",
+          "image": null,
+          "answers": ["Blackbeard", "Valkyrie", "Beide", "Keiner von beiden"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Was ist Caveiras bürgerlicher Name?",
+          "image": null,
+          "answers": ["Taina Pereira", "Sofia Alvarez", "Maria Santos", "Ana Costa"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator kam aus einer Spezialeinheit der Nachtwölfe (Nighthaven)?",
+          "image": null,
+          "answers": ["Kali", "Ace", "Aruni", "Alle drei"],
+          "correct": 3,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Nighthaven ist im Lore...",
+          "image": null,
+          "answers": ["Eine private Militärfirma (PMC)", "Eine Regierungsorganisation", "Ein Geheimdienst", "Eine Anti-Terror-Einheit"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator hat laut Lore Angst vor Pferden?",
+          "image": null,
+          "answers": ["Bandit", "Blitz", "Jäger", "IQ"],
+          "correct": 2,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Welche CTU (Counter Terrorism Unit) vertritt Ash?",
+          "image": null,
+          "answers": ["FBI SWAT", "GIGN", "SAS", "GSG9"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Operator ist offiziell der erste LGBTQ+ Operator in Siege?",
+          "image": null,
+          "answers": ["Flores", "Osa", "Sens", "Gridlock"],
+          "correct": 0,
+          "difficulty": "hard"
+        }
+      ]
+    },
+    {
+      "name": "Updates & Seasons",
+      "icon": "🔄",
+      "questions": [
+        {
+          "question": "Wie heißt die erste Season/DLC von Rainbow Six Siege?",
+          "image": null,
+          "answers": ["Operation Black Ice", "Operation Dust Line", "Operation Red Crow", "Operation Skull Rain"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welche Operator kamen mit Operation Black Ice?",
+          "image": null,
+          "answers": ["Buck & Frost", "Blackbeard & Valkyrie", "Hibana & Echo", "Capitão & Caveira"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "In welchem Jahr wurde das Operator-Ban-System in Ranked eingeführt?",
+          "image": null,
+          "answers": ["2018", "2019", "2020", "2021"],
+          "correct": 1,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator wurde einmal komplett reworked und bekam einen neuen LMG statt seinem montierten Turret?",
+          "image": null,
+          "answers": ["Tachanka", "Blackbeard", "Glaz", "Castle"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was war das kontroverseste Feature-Removal in der Geschichte von Siege?",
+          "image": null,
+          "answers": ["ACOG von Jäger entfernt", "Jäger von 3-Speed auf 2-Speed", "Ela's Scorpion Nerf", "Lion's Scan beim Release"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator war beim Release so overpowered, dass er in Pro League sofort gebannt wurde?",
+          "image": null,
+          "answers": ["Ela", "Lion", "Blackbeard", "Alle drei waren zu stark"],
+          "correct": 3,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Was wurde in Operation Health (Y2S2) gemacht?",
+          "image": null,
+          "answers": ["Nur Bug Fixes, keine neuen Operator", "Neue Map + 2 Operator", "Battle Pass eingeführt", "Neues Anti-Cheat"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Ab welchem Year begann Ubisoft nur noch 1 Operator pro Season zu veröffentlichen?",
+          "image": null,
+          "answers": ["Year 4", "Year 5", "Year 6", "Year 7"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welche Map kam mit Operation Ember Rise?",
+          "image": null,
+          "answers": ["Keine neue Map, nur Kafe Rework", "Outback", "Fortress", "Emerald Plains"],
+          "correct": 0,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Was war Jägers ACOG-Removal so ein großes Community-Event, dass es zu einem Meme wurde?",
+          "image": null,
+          "answers": ["Weil Jäger der meistgespielte Defender war", "Wegen Spawn-Peeking", "Beides", "War kein großes Ding"],
+          "correct": 2,
+          "difficulty": "medium"
+        }
+      ]
+    },
+    {
+      "name": "Details & Easter Eggs",
+      "icon": "🔍",
+      "questions": [
+        {
+          "question": "Was passiert wenn man in der Prep Phase als Attacker die eigene Drohne kaputt macht?",
+          "image": null,
+          "answers": ["Man bekommt in der Action Phase keine neue", "Man spawnt ohne Drohne", "Nichts, man hat noch eine zweite", "Man verliert 10 HP"],
+          "correct": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welche Farbe hat der Rauch von Smoke's Gas Canister?",
+          "image": null,
+          "answers": ["Gelb/Grün", "Lila", "Rot", "Weiß"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was steht auf Tachanka's Helm?",
+          "image": null,
+          "answers": ["Gar nichts", "Ein sowjetischer Stern", "LMG MOUNTED", "Sein Name auf Russisch"],
+          "correct": 0,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Kann ein Defender in der Prep Phase nach draußen gehen?",
+          "image": null,
+          "answers": ["Nein, unmöglich", "Ja, aber wird sofort erkannt", "Ja, mit 2 Sekunden Verzögerung bis Erkennung", "Nur bestimmte Operator"],
+          "correct": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welches Geräusch macht Caveira im Silent Step?",
+          "image": null,
+          "answers": ["Gar keins", "Leise Schritte", "Fast unhörbar, nur nah hörbar", "Normales Laufen aber ohne Richtung"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Was passiert, wenn Fuze seine Cluster Charge auf der Geisel-Map benutzt und die Geisel stirbt?",
+          "image": null,
+          "answers": ["Fuze's Team verliert die Runde", "Nichts, Geisel ist immun", "Der Fuze wird gekickt", "Es gibt einen Punktabzug"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Kann man in Siege friendly fire machen?",
+          "image": null,
+          "answers": ["Ja, voller Schaden", "Ja, aber mit Reverse Friendly Fire System", "Nein, gar nicht", "Nur mit Gadgets"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Was zeigt der weiße Totenkopf-Indikator an, wenn man jemanden killt?",
+          "image": null,
+          "answers": ["Normaler Kill", "Headshot Kill", "Kill durch Penetration", "Kill mit Gadget"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist die maximale Entfernung für Melee in Siege?",
+          "image": null,
+          "answers": ["1 Meter", "1.5 Meter", "2 Meter", "Es variiert je nach Operator"],
+          "correct": 1,
+          "difficulty": "expert"
+        },
+        {
+          "question": "Kann man durch ein Bullet Hole (kleines Schussloch) in einer Wand hindurchsehen UND schießen?",
+          "image": null,
+          "answers": ["Nur sehen, nicht schießen", "Beides möglich", "Nur schießen, nicht sehen", "Weder noch"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Was ist das besondere an der 'Black Ice' Waffen-Skin?",
+          "image": null,
+          "answers": ["Seltenste Skin aus Alpha Packs", "Macht die Waffe stärker", "Gibt extra Renown", "Wurde nur an Pro-Spieler verteilt"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Wie viele Kameras gibt es standardmäßig auf jeder Map für Defender?",
+          "image": null,
+          "answers": ["3", "4-7 je nach Map", "Immer genau 5", "10"],
+          "correct": 1,
+          "difficulty": "hard"
+        }
+      ]
+    },
+    {
+      "name": "Operator Icon Quiz",
+      "icon": "🎯",
+      "questions": [
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/ash.svg",
+          "answers": ["Ash", "IQ", "Twitch", "Hibana"],
+          "correct": 0,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/caveira.svg",
+          "answers": ["Nøkk", "Caveira", "Vigil", "Alibi"],
+          "correct": 1,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/mira.svg",
+          "answers": ["Clash", "Mira", "Valkyrie", "Iana"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/nokk.svg",
+          "answers": ["Caveira", "Vigil", "Nøkk", "Zero"],
+          "correct": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/maestro.svg",
+          "answers": ["Maestro", "Echo", "Valkyrie", "Lesion"],
+          "correct": 0,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/kaid.svg",
+          "answers": ["Nomad", "Kaid", "Oryx", "Azami"],
+          "correct": 1,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/flores.svg",
+          "answers": ["Ace", "Flores", "Iana", "Zero"],
+          "correct": 1,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/aruni.svg",
+          "answers": ["Kali", "Wamai", "Aruni", "Melusi"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/thorn.svg",
+          "answers": ["Azami", "Thorn", "Sens", "Solis"],
+          "correct": 1,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/iana.svg",
+          "answers": ["Alibi", "Nøkk", "Iana", "Osa"],
+          "correct": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/zero.svg",
+          "answers": ["Flores", "Maverick", "Zero (Sam Fisher)", "Kali"],
+          "correct": 2,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/azami.svg",
+          "answers": ["Thorn", "Sens", "Azami", "Solis"],
+          "correct": 2,
+          "difficulty": "hard"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/tachanka.svg",
+          "answers": ["Fuze", "Kapkan", "Tachanka", "Glaz"],
+          "correct": 2,
+          "difficulty": "easy"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/oryx.svg",
+          "answers": ["Kaid", "Oryx", "Nomad", "Amaru"],
+          "correct": 1,
+          "difficulty": "medium"
+        },
+        {
+          "question": "Welcher Operator gehört zu diesem Icon?",
+          "image": "assets/operators/mozzie.svg",
+          "answers": ["Gridlock", "Mozzie", "Lesion", "Warden"],
+          "correct": 1,
+          "difficulty": "medium"
+        }
+      ]
+    }
+  ]
+}

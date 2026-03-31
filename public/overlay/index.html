@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>R6S Quiz Show - Overlay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- GLOBAL FX LAYER (always on top) -->
+  <div id="fx-layer" class="fx-layer">
+    <div id="fx-particles"></div>
+    <div id="fx-flash"></div>
+  </div>
+
+  <!-- INTRO SCREEN -->
+  <div id="screen-intro" class="screen active">
+    <div class="intro-bg">
+      <div class="scan-line"></div>
+      <div class="hex-grid"></div>
+    </div>
+    <div class="intro-content">
+      <div class="intro-logo">
+        <svg viewBox="0 0 200 230" class="r6-logo" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="hex-outer" points="100,5 190,57 190,173 100,225 10,173 10,57" />
+          <polygon class="hex-inner" points="100,18 178,64 178,166 100,212 22,166 22,64" />
+          <text x="100" y="160" text-anchor="middle" class="logo-six">6</text>
+          <line x1="40" y1="115" x2="160" y2="115" class="logo-line" />
+        </svg>
+      </div>
+      <h1 class="intro-title">
+        <span class="title-line title-small">RAINBOW SIX SIEGE</span>
+        <span class="title-line title-big">QUIZ SHOW</span>
+      </h1>
+      <div class="intro-subtitle">BEREITE DICH VOR</div>
+      <div class="intro-pulse"></div>
+    </div>
+  </div>
+
+  <!-- PLAYERS SCREEN -->
+  <div id="screen-players" class="screen">
+    <div class="screen-header">
+      <div class="header-line"></div>
+      <h2>SPIELER</h2>
+      <div class="header-line"></div>
+    </div>
+    <div id="players-grid" class="players-grid"></div>
+  </div>
+
+  <!-- HOW TO PLAY SCREEN -->
+  <div id="screen-howToPlay" class="screen">
+    <div class="htp-bg">
+      <div class="htp-grid-lines"></div>
+      <div class="htp-scan"></div>
+    </div>
+    <div class="htp-content">
+      <div class="htp-title-section">
+        <img src="/assets/icons/brain.svg" class="htp-icon-img" alt="">
+        <h2 class="htp-title">SO FUNKTIONIERT'S</h2>
+        <div class="htp-title-line"></div>
+      </div>
+
+      <div class="htp-steps">
+        <div class="htp-step" style="--delay: 0.2s">
+          <div class="htp-step-number">01</div>
+          <div class="htp-step-content">
+            <div class="htp-step-title">SPIELER WIRD AUSGEWÄHLT</div>
+            <div class="htp-step-desc">Jeder kommt gleich oft dran — fair & zufällig</div>
+          </div>
+        </div>
+        <div class="htp-step" style="--delay: 0.4s">
+          <div class="htp-step-number">02</div>
+          <div class="htp-step-content">
+            <div class="htp-step-title">FRAGE BEANTWORTEN</div>
+            <div class="htp-step-desc">4 Antwortmöglichkeiten — nur eine ist richtig!</div>
+          </div>
+        </div>
+        <div class="htp-step" style="--delay: 0.6s">
+          <div class="htp-step-number">03</div>
+          <div class="htp-step-content">
+            <div class="htp-step-title">PUNKTE SAMMELN</div>
+            <div class="htp-step-desc">Schwere Fragen = mehr Punkte!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="htp-jokers-section">
+        <div class="htp-jokers-title">JOKER & SPECIALS</div>
+        <div class="htp-jokers-grid">
+          <div class="htp-joker-card" style="--delay: 0.8s">
+            <img src="/assets/icons/card-joker.svg" class="htp-joker-icon-img" alt="">
+            <div class="htp-joker-name">50 / 50</div>
+            <div class="htp-joker-desc">2 falsche Antworten weg</div>
+          </div>
+          <div class="htp-joker-card" style="--delay: 1.0s">
+            <img src="/assets/icons/frozen-arrow.svg" class="htp-joker-icon-img" alt="">
+            <div class="htp-joker-name">SKIP</div>
+            <div class="htp-joker-desc">Neue Frage holen</div>
+          </div>
+          <div class="htp-joker-card" style="--delay: 1.2s">
+            <img src="/assets/icons/fire.svg" class="htp-joker-icon-img" alt="">
+            <div class="htp-joker-name">DOPPELT</div>
+            <div class="htp-joker-desc">×2 Punkte</div>
+          </div>
+        </div>
+        <div class="htp-specials-grid">
+          <div class="htp-special-tag" style="--delay: 1.4s">
+            <img src="/assets/icons/lightning-helix.svg" class="htp-tag-icon" alt="">
+            <span>BLITZ — Wenig Zeit, Extra Punkte!</span>
+          </div>
+          <div class="htp-special-tag" style="--delay: 1.6s">
+            <img src="/assets/icons/skull-crossed-bones.svg" class="htp-tag-icon" alt="">
+            <span>HARDCORE — Extrem schwer, ×3 Punkte!</span>
+          </div>
+          <div class="htp-special-tag" style="--delay: 1.8s">
+            <img src="/assets/icons/shield-reflect.svg" class="htp-tag-icon" alt="">
+            <span>STEAL — Falsch? Jemand kann klauen!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIAL INTRO SCREEN -->
+  <div id="screen-specialIntro" class="screen">
+    <div class="special-bg" id="special-bg"></div>
+    <div class="special-intro-content" id="special-intro-content">
+      <div class="special-icon-wrap" id="special-icon-wrap">
+        <img id="special-icon" class="special-icon" src="" alt="">
+      </div>
+      <div class="special-title" id="special-title">BLITZRUNDE</div>
+      <div class="special-subtitle" id="special-subtitle">Wenig Zeit — Extra Punkte!</div>
+      <div class="special-player" id="special-player"></div>
+    </div>
+  </div>
+
+  <!-- PLAYER SELECT SCREEN -->
+  <div id="screen-playerSelect" class="screen">
+    <div class="screen-header">
+      <div class="header-line"></div>
+      <h2>SPIELER AUSWAHL</h2>
+      <div class="header-line"></div>
+    </div>
+    <div id="player-select-display" class="player-select-display">
+      <div id="player-roulette" class="player-roulette"></div>
+      <div id="selected-player-name" class="selected-player-name"></div>
+    </div>
+  </div>
+
+  <!-- QUESTION SCREEN -->
+  <div id="screen-question" class="screen">
+    <!-- Special round indicator bar -->
+    <div id="special-bar" class="special-bar hidden">
+      <img id="special-bar-icon" class="special-bar-icon" src="" alt="">
+      <span id="special-bar-text">BLITZRUNDE</span>
+    </div>
+
+    <div class="question-header">
+      <div class="q-category" id="q-category">KATEGORIE</div>
+      <div class="q-info-right">
+        <div id="q-diff-badge" class="diff-badge">EASY</div>
+        <div id="q-round-badge" class="round-badge">RUNDE 1/4</div>
+        <div id="q-double-badge" class="double-badge hidden">×2</div>
+        <div class="q-number" id="q-number">FRAGE 1</div>
+      </div>
+    </div>
+
+    <div class="timer-bar-container">
+      <div class="timer-bar" id="timer-bar"></div>
+      <div class="timer-text" id="timer-text">60</div>
+    </div>
+
+    <div class="question-body">
+      <div id="q-image-container" class="q-image-container hidden">
+        <img id="q-image" src="" alt="">
+      </div>
+      <div class="q-text" id="q-text">Fragetext hier</div>
+    </div>
+    <div class="answers-grid" id="answers-grid">
+      <div class="answer-box" data-idx="0"><span class="answer-letter">A</span><span class="answer-text"></span></div>
+      <div class="answer-box" data-idx="1"><span class="answer-letter">B</span><span class="answer-text"></span></div>
+      <div class="answer-box" data-idx="2"><span class="answer-letter">C</span><span class="answer-text"></span></div>
+      <div class="answer-box" data-idx="3"><span class="answer-letter">D</span><span class="answer-text"></span></div>
+    </div>
+    <div class="question-footer">
+      <div id="current-player-indicator" class="current-player-indicator"></div>
+      <div id="q-jokers" class="joker-display"></div>
+    </div>
+  </div>
+
+  <!-- REVEAL SCREEN -->
+  <div id="screen-reveal" class="screen">
+    <div class="question-header">
+      <div class="q-category" id="r-category">KATEGORIE</div>
+      <div class="q-info-right">
+        <div id="r-double-badge" class="double-badge hidden">×2</div>
+        <div class="q-number" id="r-number">FRAGE 1</div>
+      </div>
+    </div>
+
+    <div id="result-banner" class="result-banner">
+      <div id="result-banner-text" class="result-banner-text">RICHTIG!</div>
+      <div id="result-banner-sub" class="result-banner-sub"></div>
+    </div>
+
+    <div class="question-body reveal-body">
+      <div id="r-image-container" class="q-image-container hidden">
+        <img id="r-image" src="" alt="">
+      </div>
+      <div class="q-text q-text-small" id="r-text">Fragetext hier</div>
+    </div>
+    <div class="answers-grid" id="reveal-grid">
+      <div class="answer-box" data-idx="0"><span class="answer-letter">A</span><span class="answer-text"></span></div>
+      <div class="answer-box" data-idx="1"><span class="answer-letter">B</span><span class="answer-text"></span></div>
+      <div class="answer-box" data-idx="2"><span class="answer-letter">C</span><span class="answer-text"></span></div>
+      <div class="answer-box" data-idx="3"><span class="answer-letter">D</span><span class="answer-text"></span></div>
+    </div>
+    <div class="question-footer">
+      <div id="reveal-player-indicator" class="current-player-indicator"></div>
+    </div>
+
+    <!-- Steal overlay -->
+    <div id="steal-overlay" class="steal-overlay hidden">
+      <div class="steal-content">
+        <img src="/assets/icons/shield-reflect.svg" class="steal-icon" alt="">
+        <div class="steal-title">STEAL!</div>
+        <div class="steal-player" id="steal-player-name">Spieler</div>
+        <div class="steal-sub">kann die Punkte klauen!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCOREBOARD SCREEN -->
+  <div id="screen-scoreboard" class="screen">
+    <div class="screen-header">
+      <div class="header-line"></div>
+      <h2>SCOREBOARD</h2>
+      <div class="header-line"></div>
+    </div>
+    <div id="scoreboard-round" class="scoreboard-round">RUNDE 1/4</div>
+    <div id="scoreboard-list" class="scoreboard-list"></div>
+  </div>
+
+  <!-- FINALE SCREEN -->
+  <div id="screen-finale" class="screen">
+    <div class="finale-bg">
+      <div class="confetti-container" id="confetti-container"></div>
+      <div class="finale-sparks" id="finale-sparks"></div>
+    </div>
+    <div id="finale-intro" class="finale-intro">
+      <div class="finale-intro-text">UND DER GEWINNER IST...</div>
+    </div>
+    <div id="finale-podium" class="finale-podium hidden">
+      <div id="finale-3rd" class="podium-slot podium-3rd hidden">
+        <div class="podium-rank-badge">3</div>
+        <div class="podium-player-name" id="finale-name-3">---</div>
+        <div class="podium-player-score" id="finale-score-3">0 PTS</div>
+        <div class="podium-bar podium-bar-3"></div>
+      </div>
+      <div id="finale-1st" class="podium-slot podium-1st hidden">
+        <div class="finale-crown" id="finale-crown">👑</div>
+        <div class="podium-rank-badge rank-1">1</div>
+        <div class="podium-player-name podium-winner-name" id="finale-name-1">---</div>
+        <div class="podium-player-score podium-winner-score" id="finale-score-1">0 PTS</div>
+        <div class="podium-bar podium-bar-1"></div>
+      </div>
+      <div id="finale-2nd" class="podium-slot podium-2nd hidden">
+        <div class="podium-rank-badge rank-2">2</div>
+        <div class="podium-player-name" id="finale-name-2">---</div>
+        <div class="podium-player-score" id="finale-score-2">0 PTS</div>
+        <div class="podium-bar podium-bar-2"></div>
+      </div>
+    </div>
+    <div id="finale-winner-banner" class="finale-winner-banner hidden">
+      <div class="winner-banner-text" id="finale-winner-text">CHAMPION</div>
+    </div>
+  </div>
+
+  <!-- Corner decorations -->
+  <div class="corner-decor top-left"></div>
+  <div class="corner-decor top-right"></div>
+  <div class="corner-decor bottom-left"></div>
+  <div class="corner-decor bottom-right"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R6S Quiz - Host Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎮 R6S QUIZ — HOST PANEL</h1>
+    <div class="status">
+      Screen: <span id="current-screen">intro</span> |
+      Phase: <span id="current-phase">idle</span> |
+      Runde: <span id="current-round">1/4</span> |
+      Fragen übrig: <span id="questions-remaining">0</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ QUIZ CONTROL ============ -->
+    <section class="panel panel-highlight">
+      <h2>🚀 Quiz Steuerung</h2>
+
+      <!-- Slide Navigation (pre-quiz) -->
+      <div id="slide-controls">
+        <button onclick="nextSlide()" class="btn btn-big btn-accent" id="btn-next-slide">
+          ▶ NÄCHSTE FOLIE
+        </button>
+        <p class="hint" id="slide-hint">Intro → Spieler → Regeln → Quiz</p>
+      </div>
+
+      <!-- Next Round (during quiz) -->
+      <div id="auto-controls" class="hidden">
+        <div class="btn-row">
+          <button onclick="nextRound()" class="btn btn-big btn-accent" id="btn-next-round">
+            ▶ NÄCHSTE RUNDE
+          </button>
+          <button onclick="newRoundStart()" class="btn btn-accent" id="btn-new-round" style="display:none;">
+            🔄 Neue Runde
+          </button>
+        </div>
+        <p class="hint">Fairer Wechsel — jeder Spieler kommt gleich oft dran</p>
+      </div>
+
+      <!-- Answer Buttons + Joker (during answering) -->
+      <div id="answer-controls" class="hidden">
+        <div class="answer-header">
+          <p class="current-info">
+            Spieler: <strong id="answering-player">—</strong> |
+            Kategorie: <strong id="answering-category">—</strong> |
+            <span id="answering-special" class="special-indicator"></span>
+          </p>
+          <div class="timer-host">⏱ <span id="host-timer">60</span>s</div>
+        </div>
+
+        <div class="joker-row" id="joker-row">
+          <button onclick="useFiftyFifty()" class="btn btn-joker" id="btn-5050">½ 50/50</button>
+          <button onclick="useSkip()" class="btn btn-joker" id="btn-skip">⟳ SKIP</button>
+          <button onclick="useDoublePts()" class="btn btn-joker" id="btn-double">×2 DOPPELT</button>
+        </div>
+
+        <p class="answer-prompt">Welche Antwort hat der Spieler gewählt?</p>
+        <div class="answer-buttons">
+          <button onclick="submitAnswer(0)" class="btn btn-answer" id="btn-a"><span class="answer-key">A</span><span class="answer-val" id="ans-text-0">—</span></button>
+          <button onclick="submitAnswer(1)" class="btn btn-answer" id="btn-b"><span class="answer-key">B</span><span class="answer-val" id="ans-text-1">—</span></button>
+          <button onclick="submitAnswer(2)" class="btn btn-answer" id="btn-c"><span class="answer-key">C</span><span class="answer-val" id="ans-text-2">—</span></button>
+          <button onclick="submitAnswer(3)" class="btn btn-answer" id="btn-d"><span class="answer-key">D</span><span class="answer-val" id="ans-text-3">—</span></button>
+        </div>
+
+        <button onclick="endRound()" class="btn btn-sm" style="margin-top: 12px; opacity: 0.6;">⏹ Runde abbrechen</button>
+      </div>
+
+      <!-- Steal controls -->
+      <div id="steal-controls" class="hidden">
+        <div class="steal-host-banner">🛡️ STEAL — <strong id="steal-host-player">Spieler</strong> kann klauen!</div>
+        <p class="answer-prompt">Welche Antwort?</p>
+        <div class="answer-buttons">
+          <button onclick="submitSteal(0)" class="btn btn-answer btn-steal" id="steal-a"><span class="answer-key">A</span><span class="answer-val" id="steal-text-0">—</span></button>
+          <button onclick="submitSteal(1)" class="btn btn-answer btn-steal" id="steal-b"><span class="answer-key">B</span><span class="answer-val" id="steal-text-1">—</span></button>
+          <button onclick="submitSteal(2)" class="btn btn-answer btn-steal" id="steal-c"><span class="answer-key">C</span><span class="answer-val" id="steal-text-2">—</span></button>
+          <button onclick="submitSteal(3)" class="btn btn-answer btn-steal" id="steal-d"><span class="answer-key">D</span><span class="answer-val" id="steal-text-3">—</span></button>
+        </div>
+      </div>
+
+      <!-- Result display -->
+      <div id="result-display" class="hidden">
+        <div id="result-message" class="result-message">—</div>
+        <div class="btn-row" style="margin-top: 12px;">
+          <button onclick="nextRound()" class="btn btn-big btn-accent">▶ NÄCHSTE RUNDE</button>
+          <button onclick="endRound()" class="btn">📊 Scoreboard</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAYER MANAGEMENT -->
+    <section class="panel">
+      <h2>👥 Spieler</h2>
+      <div class="input-row">
+        <input type="text" id="player-name-input" placeholder="Spielername..." maxlength="20">
+        <button onclick="addPlayer()" class="btn btn-accent">Hinzufügen</button>
+      </div>
+      <div id="player-list" class="player-list"></div>
+    </section>
+
+    <!-- HISTORY LOG -->
+    <section class="panel">
+      <h2>📜 Verlauf</h2>
+      <div id="history-log" class="history-log">
+        <div class="history-empty">Noch keine Runden gespielt</div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="panel">
+      <h2>⚙️ Einstellungen</h2>
+
+      <div class="settings-grid">
+        <div class="settings-group">
+          <h3>Allgemein</h3>
+          <div class="input-row"><label>Punkte pro Frage:</label><input type="number" id="s-pointsPerQuestion" value="1" min="1" max="99" class="input-sm"></div>
+          <div class="input-row"><label>Timer (Sek.):</label><input type="number" id="s-timerDuration" value="60" min="5" max="300" class="input-sm"></div>
+          <div class="input-row"><label>Runden:</label><input type="number" id="s-totalRounds" value="4" min="1" max="20" class="input-sm"></div>
+          <div class="input-row"><label>Faire Schwierigkeit:</label><input type="checkbox" id="s-fairDifficulty" checked></div>
+        </div>
+
+        <div class="settings-group">
+          <h3>Schwierigkeits-Punkte</h3>
+          <div class="input-row"><label>Easy ×</label><input type="number" id="s-diffEasy" value="1" min="1" max="10" class="input-sm"></div>
+          <div class="input-row"><label>Medium ×</label><input type="number" id="s-diffMedium" value="1" min="1" max="10" class="input-sm"></div>
+          <div class="input-row"><label>Hard ×</label><input type="number" id="s-diffHard" value="2" min="1" max="10" class="input-sm"></div>
+          <div class="input-row"><label>Expert ×</label><input type="number" id="s-diffExpert" value="3" min="1" max="10" class="input-sm"></div>
+        </div>
+
+        <div class="settings-group">
+          <h3>⚡ Blitzrunde</h3>
+          <div class="input-row"><label>Aktiv:</label><input type="checkbox" id="s-blitzEnabled" checked></div>
+          <div class="input-row"><label>Chance (%):</label><input type="number" id="s-blitzChance" value="20" min="0" max="100" class="input-sm"></div>
+          <div class="input-row"><label>Timer (Sek.):</label><input type="number" id="s-blitzTimer" value="15" min="3" max="60" class="input-sm"></div>
+          <div class="input-row"><label>Punkte ×</label><input type="number" id="s-blitzPointsMultiplier" value="2" min="1" max="10" class="input-sm"></div>
+        </div>
+
+        <div class="settings-group">
+          <h3>💀 Hardcore</h3>
+          <div class="input-row"><label>Aktiv:</label><input type="checkbox" id="s-hardcoreEnabled" checked></div>
+          <div class="input-row"><label>Chance (%):</label><input type="number" id="s-hardcoreChance" value="10" min="0" max="100" class="input-sm"></div>
+          <div class="input-row"><label>Punkte ×</label><input type="number" id="s-hardcorePointsMultiplier" value="3" min="1" max="10" class="input-sm"></div>
+        </div>
+
+        <div class="settings-group">
+          <h3>🛡️ Steal</h3>
+          <div class="input-row"><label>Aktiv:</label><input type="checkbox" id="s-stealEnabled" checked></div>
+          <div class="input-row"><label>Chance (%):</label><input type="number" id="s-stealChance" value="10" min="0" max="100" class="input-sm"></div>
+        </div>
+      </div>
+
+      <div class="btn-row" style="margin-top: 16px;">
+        <button onclick="saveSettings()" class="btn btn-accent">💾 Einstellungen speichern</button>
+        <button onclick="resetGame()" class="btn btn-red">🔄 Komplett Reset (zurück zu Intro)</button>
+      </div>
+    </section>
+
+    <!-- SCREEN CONTROL (manual override, collapsible) -->
+    <details class="panel">
+      <summary><h2 style="display:inline">📺 Screen Control (Manuell)</h2></summary>
+      <div class="btn-row" id="screen-buttons" style="margin-top: 16px;">
+        <button onclick="setScreen('intro')" class="btn screen-btn" data-screen="intro">Intro</button>
+        <button onclick="setScreen('players')" class="btn screen-btn" data-screen="players">Spieler</button>
+        <button onclick="setScreen('howToPlay')" class="btn screen-btn" data-screen="howToPlay">Regeln</button>
+        <button onclick="setScreen('playerSelect')" class="btn screen-btn" data-screen="playerSelect">Auswahl</button>
+        <button onclick="setScreen('question')" class="btn screen-btn" data-screen="question">Frage</button>
+        <button onclick="setScreen('reveal')" class="btn screen-btn" data-screen="reveal">Reveal</button>
+        <button onclick="setScreen('scoreboard')" class="btn screen-btn" data-screen="scoreboard">Scoreboard</button>
+        <button onclick="setScreen('finale')" class="btn screen-btn" data-screen="finale">Finale</button>
+      </div>
+    </details>
+
+    <!-- MANUAL OVERRIDES -->
+    <details class="panel">
+      <summary><h2 style="display:inline">🔧 Manueller Modus</h2></summary>
+      <div style="margin-top: 16px;">
+        <div class="input-row">
+          <label>Kategorie:</label>
+          <select id="category-select" onchange="renderQuestionList()"></select>
+        </div>
+        <div id="question-list" class="question-list"></div>
+        <div class="btn-row" style="margin-top: 12px;">
+          <button onclick="revealAnswer()" class="btn btn-green" id="btn-reveal" disabled>✅ Antwort aufdecken</button>
+        </div>
+        <h3 style="margin-top: 20px; color: var(--accent);">Punkte manuell</h3>
+        <div class="input-row">
+          <label>Spieler:</label>
+          <select id="points-player-select"></select>
+          <label>Punkte:</label>
+          <input type="number" id="points-amount" value="1" min="1" max="99" style="width: 60px;">
+        </div>
+        <div class="btn-row">
+          <button onclick="givePoints(1)" class="btn btn-green">+Punkte</button>
+          <button onclick="givePoints(-1)" class="btn btn-red">−Punkte</button>
+        </div>
+      </div>
+    </details>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

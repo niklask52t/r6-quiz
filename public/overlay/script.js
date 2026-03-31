@@ -163,7 +163,7 @@ function renderQuestion(state, prefix) {
       specialBar.classList.remove('hidden');
       specialBar.className = `special-bar special-${state.specialType}`;
       const specials = {
-        blitz: { icon: '/assets/icons/lightning-helix.svg', text: 'BLITZRUNDE' },
+        blitz: { icon: '/assets/icons/frozen-arrow.svg', text: 'BLITZRUNDE — BLACK ICE' },
         hardcore: { icon: '/assets/icons/skull-crossed-bones.svg', text: 'HARDCORE' },
         steal: { icon: '/assets/icons/shield-reflect.svg', text: 'STEAL RUNDE' },
       };
@@ -275,10 +275,10 @@ function showResultBanner(data) {
 function showSpecialIntro(type, player) {
   const specials = {
     blitz: {
-      icon: '/assets/icons/lightning-helix.svg',
+      icon: '/assets/icons/frozen-arrow.svg',
       title: 'BLITZRUNDE',
       subtitle: 'Wenig Zeit — Extra Punkte!',
-      color: '#ffea00',
+      color: '#4fc3f7',
       bgClass: 'special-bg-blitz',
     },
     hardcore: {
@@ -677,11 +677,17 @@ socket.on('stateUpdate', (state) => {
   if (state.screen === 'question') {
     renderQuestion(state, 'q');
     updateTimer(state.timerRemaining);
+    // Black Ice theme for blitz
+    const qScreen = document.getElementById('screen-question');
+    qScreen.classList.toggle('blitz-mode', state.specialType === 'blitz');
   }
 
   if (state.screen === 'reveal') {
     renderQuestion(state, 'r');
     if (!state.stealActive) hideStealOverlay();
+    // Black Ice theme for blitz
+    const rScreen = document.getElementById('screen-reveal');
+    rScreen.classList.toggle('blitz-mode', state.specialType === 'blitz');
   }
 
   if (state.screen === 'finale') {

@@ -16,7 +16,12 @@
   --text: #ffffff;
   --text-dim: #8a8aaa;
   --border: rgba(255, 102, 0, 0.3);
-  --blitz: #ffea00;
+  --blitz: #4fc3f7;
+  --blitz-deep: #0d47a1;
+  --blitz-ice: #81d4fa;
+  --blitz-frost: #e1f5fe;
+  --blitz-glow: rgba(79, 195, 247, 0.4);
+  --blitz-old: #ffea00;
   --hardcore: #ff1744;
   --steal: #2979ff;
 }
@@ -573,7 +578,7 @@ body {
 }
 
 .special-bg-blitz {
-  background: radial-gradient(ellipse at center, rgba(255,234,0,0.08) 0%, var(--bg-dark) 70%);
+  background: radial-gradient(ellipse at center, rgba(79,195,247,0.12) 0%, rgba(13,71,161,0.06) 50%, var(--bg-dark) 80%);
   animation: specialBgPulse 1s ease-in-out infinite;
 }
 
@@ -758,9 +763,9 @@ body {
 }
 
 .special-bar.special-blitz {
-  background: linear-gradient(90deg, transparent, rgba(255,234,0,0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(79,195,247,0.15), transparent);
   color: var(--blitz);
-  border-bottom: 2px solid rgba(255,234,0,0.3);
+  border-bottom: 2px solid rgba(79,195,247,0.4);
 }
 
 .special-bar.special-hardcore {
@@ -1625,4 +1630,180 @@ body {
 @keyframes flashRed {
   0% { box-shadow: inset 0 0 200px rgba(255,23,68,0.3); }
   100% { box-shadow: inset 0 0 0 transparent; }
+}
+
+/* =============================================
+   BLACK ICE THEME — Blitz Round
+   ============================================= */
+
+/* Screen background: deep navy with icy radial glow */
+.screen.blitz-mode {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(79,195,247,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(13,71,161,0.1) 0%, transparent 50%),
+    linear-gradient(180deg, #050a1a 0%, #0a1628 40%, #0d1f3c 100%);
+}
+
+/* Frost crack overlay — pseudo-element with subtle crack pattern */
+.screen.blitz-mode::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(137deg, transparent 40%, rgba(79,195,247,0.03) 41%, transparent 42%),
+    linear-gradient(217deg, transparent 55%, rgba(129,212,250,0.04) 56%, transparent 57%),
+    linear-gradient(322deg, transparent 30%, rgba(79,195,247,0.02) 31%, transparent 32%),
+    linear-gradient(45deg, transparent 65%, rgba(225,245,254,0.03) 66%, transparent 67%),
+    linear-gradient(190deg, transparent 20%, rgba(79,195,247,0.02) 21%, transparent 22%);
+  z-index: 1;
+  pointer-events: none;
+  animation: frostShimmer 4s ease-in-out infinite;
+}
+
+/* Frost shimmer edges — pseudo-element */
+.screen.blitz-mode::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow:
+    inset 0 0 120px rgba(79,195,247,0.08),
+    inset 0 0 300px rgba(13,71,161,0.05);
+  border: 1px solid rgba(79,195,247,0.06);
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes frostShimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Timer bar: icy blue */
+.blitz-mode .timer-bar {
+  background: linear-gradient(90deg, var(--blitz-deep), var(--blitz), var(--blitz-ice));
+  box-shadow: 0 0 16px var(--blitz-glow), 0 0 40px rgba(13,71,161,0.3);
+}
+
+.blitz-mode .timer-bar.timer-warn {
+  background: linear-gradient(90deg, #e65100, #ff6600, #ff9800);
+  box-shadow: 0 0 12px rgba(255,152,0,0.5);
+}
+
+.blitz-mode .timer-text {
+  color: var(--blitz);
+  text-shadow: 0 0 12px var(--blitz-glow);
+}
+
+/* Category tag: ice border */
+.blitz-mode .q-category {
+  color: var(--blitz-ice);
+  border-color: var(--blitz);
+  text-shadow: 0 0 10px var(--blitz-glow);
+}
+
+/* Question text: frost white with subtle ice glow */
+.blitz-mode .q-text {
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5), 0 0 40px rgba(79,195,247,0.1);
+}
+
+/* Answer boxes: Black Ice crystalline look */
+.blitz-mode .answer-box {
+  background: linear-gradient(135deg,
+    rgba(10,22,40,0.95) 0%,
+    rgba(13,47,100,0.6) 30%,
+    rgba(25,80,140,0.4) 50%,
+    rgba(79,195,247,0.08) 70%,
+    rgba(10,22,40,0.95) 100%
+  );
+  border: 2px solid rgba(79,195,247,0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(129,212,250,0.1),
+    inset 0 -1px 0 rgba(13,71,161,0.3),
+    0 0 20px rgba(79,195,247,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Inner frost shine line */
+.blitz-mode .answer-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(129,212,250,0.06), transparent);
+  animation: iceShine 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+.blitz-mode .answer-box:nth-child(2)::before { animation-delay: 0.8s; }
+.blitz-mode .answer-box:nth-child(3)::before { animation-delay: 1.6s; }
+.blitz-mode .answer-box:nth-child(4)::before { animation-delay: 2.4s; }
+
+@keyframes iceShine {
+  0% { left: -60%; }
+  40% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* Frost crystal corners (subtle diagonal line in corners) */
+.blitz-mode .answer-box::after {
+  content: '';
+  position: absolute;
+  top: -1px; right: -1px;
+  width: 30px; height: 30px;
+  background: linear-gradient(225deg, rgba(79,195,247,0.2) 0%, transparent 60%);
+  z-index: 0;
+}
+
+/* Answer letter: icy cyan */
+.blitz-mode .answer-letter {
+  color: var(--blitz);
+  text-shadow: 0 0 8px var(--blitz-glow);
+  position: relative;
+  z-index: 1;
+}
+
+.blitz-mode .answer-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover / focus glow */
+.blitz-mode .answer-box:hover {
+  border-color: var(--blitz-ice);
+  box-shadow:
+    inset 0 1px 0 rgba(129,212,250,0.15),
+    0 0 30px rgba(79,195,247,0.15);
+}
+
+/* Player indicator */
+.blitz-mode .player-indicator {
+  color: var(--blitz-ice);
+  text-shadow: 0 0 10px var(--blitz-glow);
+}
+
+/* Double badge in blitz */
+.blitz-mode .double-badge {
+  color: var(--blitz-ice);
+  background: rgba(79,195,247,0.15);
+  border-color: var(--blitz);
+}
+
+/* Joker tags in blitz */
+.blitz-mode .joker-tag {
+  color: var(--blitz-ice);
+  border-color: rgba(79,195,247,0.3);
+}
+
+/* Image container in blitz */
+.blitz-mode .q-image-container {
+  border-color: rgba(79,195,247,0.3);
+  background: linear-gradient(135deg, #0a1628, #0d2744);
+}
+
+/* Round badge in blitz */
+.blitz-mode .round-badge {
+  color: var(--blitz-ice);
+  border-color: rgba(79,195,247,0.3);
 }

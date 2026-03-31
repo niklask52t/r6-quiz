@@ -401,8 +401,11 @@ function updateAutoButton() {
   const newRoundBtn = document.getElementById('btn-new-round');
   const s = gameState.settings || {};
   const allPlayed = gameState.players.length > 0 && gameState.players.every(p => p.playCount >= s.totalRounds);
+  // Only show finale button when game is actually over (idle/scoreboard), not while a question is still active
+  const isActive = ['answering', 'playerSelect', 'specialIntro', 'countdown', 'stealing'].includes(gameState.phase);
+  const showFinale = (allPlayed && !isActive) || gameState.gameOver;
 
-  if (allPlayed || gameState.gameOver) {
+  if (showFinale) {
     btn.textContent = '🏆 ERGEBNISSE ANZEIGEN';
     btn.className = 'btn btn-big btn-green';
     if (newRoundBtn) newRoundBtn.style.display = '';
@@ -420,11 +423,11 @@ function updateResultButtons() {
   if (!btnRow) return;
 
   const s = gameState.settings || {};
-  const allPlayed = gameState.players.length > 0 && gameState.players.every(p => p.playCount >= gameState.currentRound);
-  const isLastRound = gameState.currentRound >= (s.totalRounds || 4);
-  const gameOver = allPlayed && isLastRound;
+  const allPlayed = gameState.players.length > 0 && gameState.players.every(p => p.playCount >= s.totalRounds);
+  const isActive = ['answering', 'playerSelect', 'specialIntro', 'countdown', 'stealing'].includes(gameState.phase);
+  const gameOver = (allPlayed && !isActive) || gameState.gameOver;
 
-  if (gameOver || gameState.gameOver) {
+  if (gameOver) {
     btnRow.innerHTML = `
       <button onclick="nextRound()" class="btn btn-big btn-green">🏆 ERGEBNISSE ANZEIGEN</button>
       <button onclick="newRoundStart()" class="btn btn-accent">🔄 Neue Runde starten</button>

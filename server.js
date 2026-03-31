@@ -446,6 +446,86 @@ function sanitizeState() {
   return s;
 }
 
+// ============================================
+// NEXT ROUND (auto mode)
+// ============================================
+function triggerNextRound() {
+  if (gameState.players.length === 0) return;
+
+  const allPlayed = gameState.players.every(p => p.playCount >= settings.totalRounds);
+  if (allPlayed) {
+    gameState.screen = 'finale';
+    gameState.gameOver = true;
+    io.emit('stateUpdate', sanitizeState());
+    return;
+  }
+
+  stopTimer();
+
+  const player = pickNextPlayer();
+  player.playCount++;
+  gameState.selectedPlayer = { ...player };
+  gameState.lastPlayerId = player.id;
+  gameState.screen = 'playerSelect';
+  gameState.phase = 'playerSelect';
+  gameState.selectedAnswer = -1;
+  gameState.revealedAnswer = false;
+  gameState.hiddenAnswers = [];
+  gameState.doubleActive = false;
+  gameState.risikoActive = false;
+  gameState.specialType = null;
+
+  gameState.quizStarted = true;
+
+  const specialType = rollSpecialType(player);
+  if (specialType) trackSpecial(player, specialType);
+
+  let question;
+  if (specialType === 'hardcore') {
+    question = pickHardcoreQuestion();
+  } else {
+    question = pickQuestion(player);
+  }
+
+  if (!question) {
+    io.emit('allQuestionsUsed');
+    return;
+  }
+
+  gameState._pendingQuestion = question;
+  gameState._pendingSpecial = specialType;
+
+  io.emit('stateUpdate', sanitizeState());
+  io.emit('playerSelected', {
+    player: gameState.selectedPlayer,
+    animate: gameState.players.length > 1,
+    allPlayers: gameState.players,
+  });
+
+  const rouletteDelay = gameState.players.length > 1 ? 3800 : 1500;
+
+  if (specialType) {
+    setTimeout(() => {
+      gameState.screen = 'specialIntro';
+      gameState.phase = 'specialIntro';
+      gameState.specialType = specialType;
+      io.emit('stateUpdate', sanitizeState());
+      io.emit('specialRound', { type: specialType, player: gameState.selectedPlayer });
+    }, rouletteDelay);
+    setTimeout(() => {
+      const q = gameState._pendingQuestion;
+      if (!q) return;
+      activateQuestion(q, specialType);
+    }, rouletteDelay + 3000);
+  } else {
+    setTimeout(() => {
+      const q = gameState._pendingQuestion;
+      if (!q) return;
+      activateQuestion(q, null);
+    }, rouletteDelay);
+  }
+}
+
 // ====================================================
 // SOCKET.IO
 // ====================================================
@@ -501,86 +581,6 @@ io.on('connection', (socket) => {
       }
     }, 6000);
   });
-
-  // ============================================
-  // NEXT ROUND (auto mode)
-  // ============================================
-  function triggerNextRound() {
-    if (gameState.players.length === 0) return;
-
-    const allPlayed = gameState.players.every(p => p.playCount >= settings.totalRounds);
-    if (allPlayed) {
-      gameState.screen = 'finale';
-      gameState.gameOver = true;
-      io.emit('stateUpdate', sanitizeState());
-      return;
-    }
-
-    stopTimer();
-
-    const player = pickNextPlayer();
-    player.playCount++;
-    gameState.selectedPlayer = { ...player };
-    gameState.lastPlayerId = player.id;
-    gameState.screen = 'playerSelect';
-    gameState.phase = 'playerSelect';
-    gameState.selectedAnswer = -1;
-    gameState.revealedAnswer = false;
-    gameState.hiddenAnswers = [];
-    gameState.doubleActive = false;
-    gameState.risikoActive = false;
-    gameState.specialType = null;
-
-    gameState.quizStarted = true;
-
-    const specialType = rollSpecialType(player);
-    if (specialType) trackSpecial(player, specialType);
-
-    let question;
-    if (specialType === 'hardcore') {
-      question = pickHardcoreQuestion();
-    } else {
-      question = pickQuestion(player);
-    }
-
-    if (!question) {
-      io.emit('allQuestionsUsed');
-      return;
-    }
-
-    gameState._pendingQuestion = question;
-    gameState._pendingSpecial = specialType;
-
-    io.emit('stateUpdate', sanitizeState());
-    io.emit('playerSelected', {
-      player: gameState.selectedPlayer,
-      animate: gameState.players.length > 1,
-      allPlayers: gameState.players,
-    });
-
-    const rouletteDelay = gameState.players.length > 1 ? 3800 : 1500;
-
-    if (specialType) {
-      setTimeout(() => {
-        gameState.screen = 'specialIntro';
-        gameState.phase = 'specialIntro';
-        gameState.specialType = specialType;
-        io.emit('stateUpdate', sanitizeState());
-        io.emit('specialRound', { type: specialType, player: gameState.selectedPlayer });
-      }, rouletteDelay);
-      setTimeout(() => {
-        const q = gameState._pendingQuestion;
-        if (!q) return;
-        activateQuestion(q, specialType);
-      }, rouletteDelay + 3000);
-    } else {
-      setTimeout(() => {
-        const q = gameState._pendingQuestion;
-        if (!q) return;
-        activateQuestion(q, null);
-      }, rouletteDelay);
-    }
-  }
 
   socket.on('nextRound', () => {
     if (gameState.phase !== 'idle' && gameState.phase !== 'revealed') return;
@@ -749,7 +749,22 @@ io.on('connection', (socket) => {
     gameState.selectedPlayer = { ...player };
     stopTimer();
 
-    const question = pickQuestion(player);
+    // Pick a new question matching the current difficulty / special type
+    let question;
+    const currentDiff = gameState.currentQuestion.difficulty;
+    if (gameState.specialType === 'hardcore') {
+      question = pickHardcoreQuestion();
+    } else {
+      // Try same difficulty first
+      const pool = buildQuestionPool();
+      const unused = pool.filter(q => !gameState.usedQuestions.includes(`${q.categoryIndex}-${q.questionIndex}`));
+      let sameDiff = unused.filter(q => q.difficulty === currentDiff);
+      if (sameDiff.length > 0) {
+        question = sameDiff[Math.floor(Math.random() * sameDiff.length)];
+      } else {
+        question = pickQuestion(player);
+      }
+    }
     if (!question) { io.emit('allQuestionsUsed'); return; }
 
     io.emit('jokerUsed', { type: 'skip', playerId: player.id });

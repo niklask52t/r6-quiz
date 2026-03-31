@@ -679,15 +679,17 @@ function runRoulette(allPlayers, selected) {
   nameDisplay.textContent = '';
 
   let items = [];
+  const uniqueNames = [...new Set(allPlayers.map(p => p.name))];
   const totalItems = Math.max(allPlayers.length * 6, 18);
   for (let i = 0; i < totalItems; i++) {
     let candidates = allPlayers.filter(p => items.length === 0 || p.name !== items[items.length - 1].name);
     if (candidates.length === 0) candidates = allPlayers;
     items.push(candidates[Math.floor(Math.random() * candidates.length)]);
   }
-  if (items.length > 0 && items[items.length - 1].name === selected.name) {
+  // Ensure the item right before the selected landing is a different name
+  if (uniqueNames.length > 1) {
     const others = allPlayers.filter(p => p.name !== selected.name);
-    if (others.length > 0) items[items.length - 1] = others[Math.floor(Math.random() * others.length)];
+    items[items.length - 1] = others[Math.floor(Math.random() * others.length)];
   }
   items.push(selected);
 
@@ -729,9 +731,17 @@ function showPlayerDirect(player) {
 // =============================================
 // JOKER ANIMATIONS
 // =============================================
+function showJokerPopup(text, colorClass) {
+  const popup = document.getElementById('joker-popup');
+  popup.textContent = text;
+  popup.className = 'joker-popup ' + colorClass + ' pop-in';
+  // Reset after animation
+  setTimeout(() => { popup.className = 'joker-popup'; }, 1300);
+}
+
 function animateJoker5050(hiddenAnswers) {
   const grid = document.getElementById('answers-grid');
-  // Flash before hiding
+  showJokerPopup('50 / 50', 'pop-5050');
   screenFlash('rgba(255,102,0,0.2)');
   spawnGlitchLines();
 
@@ -752,6 +762,7 @@ function animateJoker5050(hiddenAnswers) {
 }
 
 function animateJokerSkip() {
+  showJokerPopup('SKIP', 'pop-skip');
   screenFlash('rgba(0,150,255,0.2)');
   spawnGlitchLines();
   const qScreen = document.getElementById('screen-question');
@@ -761,6 +772,7 @@ function animateJokerSkip() {
 }
 
 function animateJokerDouble() {
+  showJokerPopup('DOPPELT ×2', 'pop-double');
   screenFlash('rgba(255,234,0,0.3)', 600);
   const badge = document.getElementById('q-double-badge');
   if (badge) {
@@ -779,6 +791,7 @@ function animateJokerDouble() {
 }
 
 function animateJokerRisiko() {
+  showJokerPopup('RISIKO', 'pop-risiko');
   // Dramatic red/black flash — danger!
   screenFlash('rgba(255,23,68,0.5)', 400);
   setTimeout(() => screenFlash('rgba(0,0,0,0.4)', 300), 200);

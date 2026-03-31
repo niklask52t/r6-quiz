@@ -479,6 +479,7 @@ io.on('connection', (socket) => {
   // COUNTDOWN (before first round)
   // ============================================
   socket.on('startCountdown', () => {
+    if (gameState.phase === 'countdown') return;
     gameState.screen = 'countdown';
     gameState.phase = 'countdown';
     gameState.quizStarted = true;
@@ -554,6 +555,7 @@ io.on('connection', (socket) => {
   // ============================================
   socket.on('nextRound', () => {
     if (gameState.players.length === 0) return;
+    if (gameState.phase !== 'idle' && gameState.phase !== 'revealed') return;
 
     const allPlayed = gameState.players.every(p => p.playCount >= settings.totalRounds);
     if (allPlayed) {

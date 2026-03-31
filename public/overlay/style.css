@@ -220,22 +220,20 @@ body {
 
 /* ---- R6 LOGO ---- */
 .intro-logo {
-  width: 180px;
-  height: 210px;
   margin-bottom: 20px;
-  filter: drop-shadow(0 0 30px var(--accent-glow)) drop-shadow(0 0 60px rgba(255,102,0,0.2));
   animation: logoPulse 3s ease-in-out infinite;
 }
 
-.r6-logo { width: 100%; height: 100%; }
-.r6-logo .hex-outer { fill: none; stroke: var(--accent); stroke-width: 4; }
-.r6-logo .hex-inner { fill: rgba(255,102,0,0.06); stroke: var(--border); stroke-width: 2; }
-.r6-logo .logo-six { font-family: 'Teko', sans-serif; font-size: 140px; font-weight: 700; fill: var(--accent); }
-.r6-logo .logo-line { stroke: var(--accent); stroke-width: 3; opacity: 0.5; }
+.r6-logo-img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(100,100,255,0.3)) drop-shadow(0 0 60px rgba(150,50,255,0.2));
+}
 
 @keyframes logoPulse {
-  0%, 100% { filter: drop-shadow(0 0 30px var(--accent-glow)) drop-shadow(0 0 60px rgba(255,102,0,0.2)); transform: scale(1); }
-  50% { filter: drop-shadow(0 0 50px var(--accent-glow)) drop-shadow(0 0 100px rgba(255,102,0,0.35)); transform: scale(1.03); }
+  0%, 100% { filter: drop-shadow(0 0 30px rgba(100,100,255,0.3)) drop-shadow(0 0 60px rgba(150,50,255,0.2)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 50px rgba(100,100,255,0.4)) drop-shadow(0 0 100px rgba(150,50,255,0.35)); transform: scale(1.03); }
 }
 
 .intro-title {

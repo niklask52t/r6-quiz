@@ -73,8 +73,8 @@
     <div id="players-grid" class="players-grid"></div>
   </div>
 
-  <!-- HOW TO PLAY SCREEN -->
-  <div id="screen-howToPlay" class="screen">
+  <!-- RULES SCREEN -->
+  <div id="screen-rules" class="screen">
     <div class="htp-bg">
       <div class="htp-grid-lines"></div>
       <div class="htp-scan"></div>
@@ -85,7 +85,6 @@
         <h2 class="htp-title">SO FUNKTIONIERT'S</h2>
         <div class="htp-title-line"></div>
       </div>
-
       <div class="htp-steps">
         <div class="htp-step" style="--delay: 0.2s">
           <div class="htp-step-number">01</div>
@@ -109,41 +108,111 @@
           </div>
         </div>
       </div>
-
-      <div class="htp-jokers-section">
-        <div class="htp-jokers-title">JOKER & SPECIALS</div>
-        <div class="htp-jokers-grid">
-          <div class="htp-joker-card" style="--delay: 0.8s">
-            <img src="/assets/icons/card-joker.svg" class="htp-joker-icon-img" alt="">
-            <div class="htp-joker-name">50 / 50</div>
-            <div class="htp-joker-desc">2 falsche Antworten weg</div>
-          </div>
-          <div class="htp-joker-card" style="--delay: 1.0s">
-            <img src="/assets/icons/frozen-arrow.svg" class="htp-joker-icon-img" alt="">
-            <div class="htp-joker-name">SKIP</div>
-            <div class="htp-joker-desc">Neue Frage holen</div>
-          </div>
-          <div class="htp-joker-card" style="--delay: 1.2s">
-            <img src="/assets/icons/fire.svg" class="htp-joker-icon-img" alt="">
-            <div class="htp-joker-name">DOPPELT</div>
-            <div class="htp-joker-desc">×2 Punkte</div>
-          </div>
+      <div class="htp-specials-grid" style="margin-top: 40px;">
+        <div class="htp-special-tag" style="--delay: 0.8s">
+          <img src="/assets/icons/frozen-arrow.svg" class="htp-tag-icon" alt="">
+          <span>BLITZ — Wenig Zeit, Extra Punkte!</span>
         </div>
-        <div class="htp-specials-grid">
-          <div class="htp-special-tag" style="--delay: 1.4s">
-            <img src="/assets/icons/lightning-helix.svg" class="htp-tag-icon" alt="">
-            <span>BLITZ — Wenig Zeit, Extra Punkte!</span>
-          </div>
-          <div class="htp-special-tag" style="--delay: 1.6s">
-            <img src="/assets/icons/skull-crossed-bones.svg" class="htp-tag-icon" alt="">
-            <span>HARDCORE — Extrem schwer, ×3 Punkte!</span>
-          </div>
-          <div class="htp-special-tag" style="--delay: 1.8s">
-            <img src="/assets/icons/shield-reflect.svg" class="htp-tag-icon" alt="">
-            <span>STEAL — Falsch? Jemand kann klauen!</span>
-          </div>
+        <div class="htp-special-tag" style="--delay: 1.0s">
+          <img src="/assets/icons/skull-crossed-bones.svg" class="htp-tag-icon" alt="">
+          <span>HARDCORE — Extrem schwer, ×3 Punkte!</span>
+        </div>
+        <div class="htp-special-tag" style="--delay: 1.2s">
+          <img src="/assets/icons/shield-reflect.svg" class="htp-tag-icon" alt="">
+          <span>STEAL — Falsch? Jemand kann klauen!</span>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- JOKER OVERVIEW SCREEN -->
+  <div id="screen-jokerOverview" class="screen">
+    <div class="htp-bg">
+      <div class="htp-grid-lines"></div>
+      <div class="htp-scan"></div>
+    </div>
+    <div class="htp-content">
+      <div class="htp-title-section">
+        <img src="/assets/icons/card-joker.svg" class="htp-icon-img" alt="">
+        <h2 class="htp-title">4 JOKER</h2>
+        <div class="htp-title-line"></div>
+        <div class="htp-step-desc" style="margin-top:12px; font-size:28px; opacity:0.7; letter-spacing:4px;">JEDER SPIELER HAT JEDEN JOKER EINMAL</div>
+      </div>
+      <div class="htp-jokers-grid" style="margin-top: 40px;">
+        <div class="htp-joker-card" style="--delay: 0.3s">
+          <img src="/assets/icons/card-joker.svg" class="htp-joker-icon-img" alt="">
+          <div class="htp-joker-name">50 / 50</div>
+        </div>
+        <div class="htp-joker-card" style="--delay: 0.5s">
+          <img src="/assets/icons/fast-forward-button.svg" class="htp-joker-icon-img" alt="">
+          <div class="htp-joker-name">SKIP</div>
+        </div>
+        <div class="htp-joker-card" style="--delay: 0.7s">
+          <img src="/assets/icons/fire.svg" class="htp-joker-icon-img" alt="">
+          <div class="htp-joker-name">DOPPELT</div>
+        </div>
+        <div class="htp-joker-card htp-joker-risiko" style="--delay: 0.9s">
+          <img src="/assets/icons/skull-crossed-bones.svg" class="htp-joker-icon-img" alt="">
+          <div class="htp-joker-name">RISIKO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOKER: 50/50 -->
+  <div id="screen-joker5050" class="screen">
+    <div class="htp-bg"><div class="htp-grid-lines"></div><div class="htp-scan"></div></div>
+    <div class="joker-detail">
+      <div class="joker-detail-icon-wrap">
+        <img src="/assets/icons/card-joker.svg" class="joker-detail-icon" alt="">
+      </div>
+      <h2 class="joker-detail-name">50 / 50</h2>
+      <div class="joker-detail-line"></div>
+      <p class="joker-detail-desc" style="--delay: 0.3s">2 falsche Antworten werden entfernt.</p>
+      <p class="joker-detail-sub" style="--delay: 0.5s">Nur noch 2 Optionen übrig — 50% Chance!</p>
+    </div>
+  </div>
+
+  <!-- JOKER: SKIP -->
+  <div id="screen-jokerSkip" class="screen">
+    <div class="htp-bg"><div class="htp-grid-lines"></div><div class="htp-scan"></div></div>
+    <div class="joker-detail">
+      <div class="joker-detail-icon-wrap">
+        <img src="/assets/icons/fast-forward-button.svg" class="joker-detail-icon" alt="">
+      </div>
+      <h2 class="joker-detail-name">SKIP</h2>
+      <div class="joker-detail-line"></div>
+      <p class="joker-detail-desc" style="--delay: 0.3s">Frage überspringen, neue Frage bekommen.</p>
+      <p class="joker-detail-sub" style="--delay: 0.5s">Timer startet neu — gleiche Kategorie möglich.</p>
+    </div>
+  </div>
+
+  <!-- JOKER: DOPPELT -->
+  <div id="screen-jokerDouble" class="screen">
+    <div class="htp-bg"><div class="htp-grid-lines"></div><div class="htp-scan"></div></div>
+    <div class="joker-detail">
+      <div class="joker-detail-icon-wrap joker-icon-fire">
+        <img src="/assets/icons/fire.svg" class="joker-detail-icon" alt="">
+      </div>
+      <h2 class="joker-detail-name">DOPPELT</h2>
+      <div class="joker-detail-line"></div>
+      <p class="joker-detail-desc" style="--delay: 0.3s">Punkte für diese Frage werden verdoppelt!</p>
+      <p class="joker-detail-sub" style="--delay: 0.5s">×2 auf alles — auch auf Schwierigkeits-Bonus.</p>
+    </div>
+  </div>
+
+  <!-- JOKER: RISIKO -->
+  <div id="screen-jokerRisiko" class="screen">
+    <div class="htp-bg"><div class="htp-grid-lines"></div><div class="htp-scan"></div></div>
+    <div class="joker-detail joker-detail-risiko">
+      <div class="joker-detail-icon-wrap joker-icon-risiko">
+        <img src="/assets/icons/skull-crossed-bones.svg" class="joker-detail-icon" alt="">
+      </div>
+      <h2 class="joker-detail-name" style="color: #ff1744;">RISIKO</h2>
+      <div class="joker-detail-line" style="background: #ff1744;"></div>
+      <p class="joker-detail-desc" style="--delay: 0.3s">Richtig? ×3 PUNKTE!</p>
+      <p class="joker-detail-desc" style="--delay: 0.5s; color: #ff1744;">Falsch? HÄLFTE DEINER PUNKTE WEG!</p>
+      <p class="joker-detail-sub" style="--delay: 0.7s">Alles oder nichts. Traust du dich?</p>
     </div>
   </div>
 

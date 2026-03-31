@@ -5,6 +5,8 @@ let questionsData = null;
 let totalQuestions = 0;
 
 let quizStarted = false;
+const explainSlides = ['rules', 'jokerOverview', 'joker5050', 'jokerSkip', 'jokerDouble', 'jokerRisiko'];
+let explainIndex = -1; // -1 = not in explanation flow
 
 // ---- SOCKET EVENTS ----
 socket.on('stateUpdate', (state) => {
@@ -109,11 +111,25 @@ function updateUI() {
   resultDisplay.classList.add('hidden');
   stealControls.classList.add('hidden');
 
-  if (gameState.phase === 'countdown') {
+  if (explainIndex >= 0) {
+    // Showing explanation slides — show WEITER button
+    slideControls.classList.remove('hidden');
+    const btn = document.getElementById('btn-start-game');
+    const hint = document.getElementById('slide-hint');
+    const slideLabels = ['Regeln', 'Joker-Übersicht', '50/50', 'Skip', 'Doppelt', 'Risiko'];
+    btn.textContent = explainIndex < explainSlides.length - 1 ? '▶ WEITER' : '🎮 LOS GEHT\'S!';
+    btn.onclick = nextExplainSlide;
+    if (hint) hint.textContent = `Folie ${explainIndex + 1}/${explainSlides.length}: ${slideLabels[explainIndex] || ''}`;
+  } else if (gameState.phase === 'countdown') {
     // Show nothing during countdown — just wait
   } else if (gameState.phase === 'idle' || gameState.phase === 'playerSelect' || gameState.phase === 'specialIntro') {
     if (!quizStarted) {
       slideControls.classList.remove('hidden');
+      const btn = document.getElementById('btn-start-game');
+      const hint = document.getElementById('slide-hint');
+      btn.textContent = '🎮 SPIEL BEGINNEN';
+      btn.onclick = startGame;
+      if (hint) hint.textContent = 'Spieler hinzufügen, dann Spiel starten!';
     } else {
       autoControls.classList.remove('hidden');
       updateAutoButton();
@@ -207,8 +223,21 @@ function startGame() {
     alert('Füge erst Spieler hinzu!');
     return;
   }
-  quizStarted = true;
-  socket.emit('startCountdown');
+  // Start explanation flow
+  explainIndex = 0;
+  setScreen(explainSlides[0]);
+}
+
+function nextExplainSlide() {
+  explainIndex++;
+  if (explainIndex < explainSlides.length) {
+    setScreen(explainSlides[explainIndex]);
+  } else {
+    // Done with explanation → countdown
+    explainIndex = -1;
+    quizStarted = true;
+    socket.emit('startCountdown');
+  }
 }
 
 // ---- ACTIONS ----

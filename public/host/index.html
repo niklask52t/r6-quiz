@@ -28,7 +28,7 @@
         <button onclick="startGame()" class="btn btn-big btn-accent" id="btn-start-game">
           🎮 SPIEL BEGINNEN
         </button>
-        <p class="hint">Spieler hinzufügen, dann Spiel starten!</p>
+        <p class="hint" id="slide-hint">Spieler hinzufügen, dann Spiel starten!</p>
       </div>
 
       <!-- Next Round (during quiz) -->
@@ -168,7 +168,8 @@
       <div class="btn-row" id="screen-buttons" style="margin-top: 16px;">
         <button onclick="setScreen('intro')" class="btn screen-btn" data-screen="intro">Intro</button>
         <button onclick="setScreen('players')" class="btn screen-btn" data-screen="players">Spieler</button>
-        <button onclick="setScreen('howToPlay')" class="btn screen-btn" data-screen="howToPlay">Regeln</button>
+        <button onclick="setScreen('rules')" class="btn screen-btn" data-screen="rules">Regeln</button>
+        <button onclick="setScreen('jokerOverview')" class="btn screen-btn" data-screen="jokerOverview">Joker</button>
         <button onclick="setScreen('playerSelect')" class="btn screen-btn" data-screen="playerSelect">Auswahl</button>
         <button onclick="setScreen('question')" class="btn screen-btn" data-screen="question">Frage</button>
         <button onclick="setScreen('reveal')" class="btn screen-btn" data-screen="reveal">Reveal</button>

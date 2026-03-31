@@ -458,6 +458,80 @@ io.on('connection', (socket) => {
   });
 
   // ============================================
+  // COUNTDOWN (before first round)
+  // ============================================
+  socket.on('startCountdown', () => {
+    gameState.screen = 'countdown';
+    gameState.phase = 'countdown';
+    gameState.quizStarted = true;
+    io.emit('stateUpdate', sanitizeState());
+    io.emit('startCountdown');
+
+    // After countdown animation (~6s), auto-trigger first round
+    setTimeout(() => {
+      if (gameState.phase === 'countdown') {
+        // Emit nextRound internally
+        if (gameState.players.length === 0) return;
+        const player = pickNextPlayer();
+        player.playCount++;
+        gameState.selectedPlayer = { ...player };
+        gameState.lastPlayerId = player.id;
+        gameState.screen = 'playerSelect';
+        gameState.phase = 'playerSelect';
+        gameState.selectedAnswer = -1;
+        gameState.revealedAnswer = false;
+        gameState.hiddenAnswers = [];
+        gameState.doubleActive = false;
+        gameState.specialType = null;
+
+        const specialType = rollSpecialType(player);
+        if (specialType) trackSpecial(player, specialType);
+
+        let question;
+        if (specialType === 'hardcore') {
+          question = pickHardcoreQuestion();
+        } else {
+          question = pickQuestion(player);
+        }
+        if (!question) { io.emit('allQuestionsUsed'); return; }
+
+        gameState._pendingQuestion = question;
+        gameState._pendingSpecial = specialType;
+
+        io.emit('stateUpdate', sanitizeState());
+        io.emit('playerSelected', {
+          player: gameState.selectedPlayer,
+          animate: gameState.players.length > 1,
+          allPlayers: gameState.players,
+        });
+
+        const rouletteDelay = gameState.players.length > 1 ? 3800 : 1500;
+
+        if (specialType) {
+          setTimeout(() => {
+            gameState.screen = 'specialIntro';
+            gameState.phase = 'specialIntro';
+            gameState.specialType = specialType;
+            io.emit('stateUpdate', sanitizeState());
+            io.emit('specialRound', { type: specialType, player: gameState.selectedPlayer });
+          }, rouletteDelay);
+          setTimeout(() => {
+            const q = gameState._pendingQuestion;
+            if (!q) return;
+            activateQuestion(q, specialType);
+          }, rouletteDelay + 3000);
+        } else {
+          setTimeout(() => {
+            const q = gameState._pendingQuestion;
+            if (!q) return;
+            activateQuestion(q, null);
+          }, rouletteDelay);
+        }
+      }
+    }, 6000);
+  });
+
+  // ============================================
   // NEXT ROUND (auto mode)
   // ============================================
   socket.on('nextRound', () => {

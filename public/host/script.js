@@ -111,7 +111,9 @@ function updateUI() {
   resultDisplay.classList.add('hidden');
   stealControls.classList.add('hidden');
 
-  if (gameState.phase === 'idle' || gameState.phase === 'playerSelect' || gameState.phase === 'specialIntro') {
+  if (gameState.phase === 'countdown') {
+    // Show nothing during countdown — just wait
+  } else if (gameState.phase === 'idle' || gameState.phase === 'playerSelect' || gameState.phase === 'specialIntro') {
     if (!quizStarted) {
       slideControls.classList.remove('hidden');
       updateSlideHint();
@@ -202,7 +204,7 @@ function nextSlide() {
     setScreen(slideOrder[currentIdx + 1]);
   } else {
     quizStarted = true;
-    nextRound();
+    socket.emit('startCountdown');
   }
 }
 

@@ -570,6 +570,250 @@ body {
 }
 
 /* =============================================
+   COUNTDOWN SCREEN — GAME START
+   ============================================= */
+.countdown-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(255,102,0,0.06) 0%, transparent 60%),
+    var(--bg-dark);
+  overflow: hidden;
+}
+
+.countdown-grid {
+  position: absolute;
+  inset: 0;
+}
+
+.hex-cell {
+  position: absolute;
+  width: 40px;
+  height: 46px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: rgba(255,102,0,0.06);
+  border: 1px solid rgba(255,102,0,0.1);
+  animation: hexFloat 3s ease-in-out infinite alternate;
+  opacity: 0;
+}
+
+@keyframes hexFloat {
+  0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 0.4; transform: scale(1) rotate(30deg); }
+  100% { opacity: 0; transform: scale(0.8) rotate(60deg); }
+}
+
+.countdown-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 300px rgba(0,0,0,0.8);
+  z-index: 1;
+}
+
+.countdown-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 4px
+  );
+  z-index: 2;
+  pointer-events: none;
+  animation: scanlineScroll 0.1s linear infinite;
+}
+
+@keyframes scanlineScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+.countdown-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 0;
+}
+
+.countdown-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 16px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  animation: labelPulse 1s ease-in-out infinite;
+}
+
+@keyframes labelPulse {
+  0%, 100% { opacity: 0.6; letter-spacing: 16px; }
+  50% { opacity: 1; letter-spacing: 20px; }
+}
+
+.countdown-number {
+  font-family: 'Teko', sans-serif;
+  font-size: 400px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow:
+    0 0 80px var(--accent-glow),
+    0 0 160px rgba(255,102,0,0.3),
+    0 0 300px rgba(255,102,0,0.1);
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Slam animation on each number */
+.countdown-number.cd-slam {
+  animation: cdSlam 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes cdSlam {
+  0% { transform: scale(4) rotate(-8deg); opacity: 0; filter: blur(20px); }
+  30% { transform: scale(0.8) rotate(3deg); opacity: 1; filter: blur(0); }
+  50% { transform: scale(1.15) rotate(-1deg); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+/* Number 2: yellow shift */
+.countdown-number.cd-two {
+  color: #ffea00;
+  text-shadow:
+    0 0 80px rgba(255,234,0,0.4),
+    0 0 160px rgba(255,234,0,0.2),
+    0 0 300px rgba(255,234,0,0.1);
+  animation: cdSlam 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Number 1: red/danger + pulse */
+.countdown-number.cd-one {
+  color: #ff1744;
+  text-shadow:
+    0 0 80px rgba(255,23,68,0.5),
+    0 0 160px rgba(255,23,68,0.3),
+    0 0 300px rgba(255,23,68,0.15);
+  animation: cdSlam 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), cdPulseRed 0.3s ease-in-out 0.6s infinite;
+}
+
+@keyframes cdPulseRed {
+  0%, 100% { text-shadow: 0 0 80px rgba(255,23,68,0.5), 0 0 160px rgba(255,23,68,0.3); }
+  50% { text-shadow: 0 0 120px rgba(255,23,68,0.7), 0 0 240px rgba(255,23,68,0.4), 0 0 400px rgba(255,23,68,0.2); }
+}
+
+/* GO! — explode in */
+.countdown-number.cd-go {
+  font-size: 500px;
+  color: #fff;
+  text-shadow:
+    0 0 60px rgba(255,102,0,0.8),
+    0 0 120px rgba(255,102,0,0.5),
+    0 0 200px rgba(255,234,0,0.3),
+    0 0 400px rgba(255,102,0,0.2);
+  animation: cdGo 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes cdGo {
+  0% { transform: scale(0) rotate(20deg); opacity: 0; filter: blur(30px); }
+  20% { transform: scale(5) rotate(-5deg); opacity: 0.3; filter: blur(10px); }
+  40% { transform: scale(0.9) rotate(2deg); opacity: 1; filter: blur(0); }
+  60% { transform: scale(1.2) rotate(-1deg); }
+  80% { transform: scale(0.95); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.countdown-sub {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 12px;
+  color: var(--text-dim);
+  margin-top: -20px;
+  animation: subFlicker 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes subFlicker {
+  0%, 40% { opacity: 0.4; }
+  50% { opacity: 0; }
+  60%, 100% { opacity: 0.6; }
+}
+
+/* Bars on sides */
+.countdown-bars {
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.countdown-bar {
+  position: absolute;
+  top: 50%;
+  height: 4px;
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow), 0 0 60px rgba(255,102,0,0.2);
+  transform: translateY(-50%);
+}
+
+.bar-left {
+  left: 0;
+  width: 30%;
+  animation: barExtend 1.5s ease-in-out infinite alternate;
+}
+
+.bar-right {
+  right: 0;
+  width: 30%;
+  animation: barExtend 1.5s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes barExtend {
+  0% { width: 20%; opacity: 0.3; }
+  100% { width: 35%; opacity: 0.8; }
+}
+
+/* Corner brackets */
+.countdown-corners {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+
+.countdown-corner {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-color: var(--accent);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0.6;
+  animation: cornerPulse 2s ease-in-out infinite;
+}
+
+.corner-tl { top: 60px; left: 60px; border-top-width: 3px; border-left-width: 3px; }
+.corner-tr { top: 60px; right: 60px; border-top-width: 3px; border-right-width: 3px; }
+.corner-bl { bottom: 60px; left: 60px; border-bottom-width: 3px; border-left-width: 3px; }
+.corner-br { bottom: 60px; right: 60px; border-bottom-width: 3px; border-right-width: 3px; }
+
+@keyframes cornerPulse {
+  0%, 100% { opacity: 0.3; width: 80px; height: 80px; }
+  50% { opacity: 0.8; width: 100px; height: 100px; }
+}
+
+/* =============================================
    SPECIAL INTRO SCREEN
    ============================================= */
 .special-bg {

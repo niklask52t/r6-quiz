@@ -525,6 +525,133 @@ function spawnSparks(x, y) {
 }
 
 // =============================================
+// GAME START COUNTDOWN
+// =============================================
+function runGameCountdown() {
+  const numEl = document.getElementById('countdown-number');
+  const labelEl = document.getElementById('countdown-label');
+  const subEl = document.getElementById('countdown-sub');
+  const grid = document.getElementById('countdown-grid');
+
+  if (!numEl) return;
+
+  // Spawn animated hex grid background
+  grid.innerHTML = '';
+  for (let i = 0; i < 40; i++) {
+    const hex = document.createElement('div');
+    hex.className = 'hex-cell';
+    hex.style.left = `${Math.random() * 100}%`;
+    hex.style.top = `${Math.random() * 100}%`;
+    hex.style.animationDelay = `${Math.random() * 3}s`;
+    hex.style.animationDuration = `${2 + Math.random() * 3}s`;
+    grid.appendChild(hex);
+  }
+
+  numEl.textContent = '';
+  labelEl.textContent = 'GAME STARTET IN';
+  labelEl.className = 'countdown-label';
+  subEl.textContent = 'MACH DICH BEREIT';
+  subEl.className = 'countdown-sub';
+
+  // Initial flash
+  screenFlash('rgba(255,102,0,0.3)', 500);
+  spawnGlitchLines();
+
+  // Glitch buildup
+  let glitchInterval = setInterval(() => {
+    spawnGlitchLines();
+  }, 300);
+
+  // === 3 ===
+  setTimeout(() => {
+    numEl.textContent = '3';
+    numEl.className = 'countdown-number cd-slam';
+    screenFlash('rgba(255,102,0,0.25)', 300);
+    spawnParticles(960, 540, 50, '#ff6600', 300);
+    spawnParticles(960, 540, 30, '#ffea00', 200);
+    // Screen shake
+    const screen = document.getElementById('screen-countdown');
+    screen.classList.add('screen-shake');
+    setTimeout(() => screen.classList.remove('screen-shake'), 500);
+    // Side bursts
+    spawnParticles(100, 540, 20, '#ff6600', 150);
+    spawnParticles(1820, 540, 20, '#ff6600', 150);
+  }, 800);
+
+  // === 2 ===
+  setTimeout(() => {
+    numEl.textContent = '2';
+    numEl.className = 'countdown-number cd-slam';
+    void numEl.offsetWidth; // force reflow for re-animation
+    numEl.className = 'countdown-number cd-slam cd-two';
+    screenFlash('rgba(255,234,0,0.3)', 300);
+    spawnParticles(960, 540, 60, '#ffea00', 350);
+    spawnParticles(960, 540, 40, '#ff6600', 250);
+    spawnGlitchLines();
+    const screen = document.getElementById('screen-countdown');
+    screen.classList.add('screen-shake');
+    setTimeout(() => screen.classList.remove('screen-shake'), 500);
+    spawnParticles(200, 200, 25, '#ffea00', 180);
+    spawnParticles(1720, 880, 25, '#ffea00', 180);
+  }, 2200);
+
+  // === 1 ===
+  setTimeout(() => {
+    numEl.textContent = '1';
+    numEl.className = 'countdown-number cd-slam';
+    void numEl.offsetWidth;
+    numEl.className = 'countdown-number cd-slam cd-one';
+    screenFlash('rgba(255,23,68,0.35)', 400);
+    spawnParticles(960, 540, 80, '#ff1744', 400);
+    spawnParticles(960, 540, 50, '#ff6600', 300);
+    spawnParticles(960, 540, 30, '#ffea00', 200);
+    spawnGlitchLines();
+    spawnGlitchLines();
+    const screen = document.getElementById('screen-countdown');
+    screen.classList.add('screen-shake');
+    setTimeout(() => screen.classList.remove('screen-shake'), 600);
+    // Corner bursts
+    spawnParticles(100, 100, 20, '#ff1744', 150);
+    spawnParticles(1820, 100, 20, '#ff1744', 150);
+    spawnParticles(100, 980, 20, '#ff1744', 150);
+    spawnParticles(1820, 980, 20, '#ff1744', 150);
+  }, 3600);
+
+  // === GO! ===
+  setTimeout(() => {
+    clearInterval(glitchInterval);
+    numEl.textContent = 'GO!';
+    numEl.className = 'countdown-number cd-go';
+    labelEl.textContent = '';
+    subEl.textContent = '';
+
+    // MASSIVE explosion
+    screenFlash('rgba(255,255,255,0.5)', 600);
+    screenFlash('rgba(255,102,0,0.4)', 800);
+
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => {
+        spawnParticles(960, 540, 30, ['#ff6600', '#ffea00', '#ff1744', '#00e676', '#2979ff'][i % 5], 400);
+      }, i * 80);
+    }
+    spawnGlitchLines();
+    spawnGlitchLines();
+    spawnGlitchLines();
+
+    const screen = document.getElementById('screen-countdown');
+    screen.classList.add('screen-shake');
+    setTimeout(() => screen.classList.remove('screen-shake'), 800);
+
+    // Burst particles from all edges
+    for (let i = 0; i < 15; i++) {
+      setTimeout(() => {
+        spawnParticles(Math.random() * 1920, Math.random() * 1080, 10, '#ff6600', 100);
+      }, i * 40);
+    }
+  }, 5000);
+}
+
+// =============================================
 // PLAYER ROULETTE
 // =============================================
 function runRoulette(allPlayers, selected) {
@@ -735,6 +862,10 @@ socket.on('playerSelected', ({ player, animate, allPlayers }) => {
 
 socket.on('specialRound', ({ type, player }) => {
   showSpecialIntro(type, player);
+});
+
+socket.on('startCountdown', () => {
+  runGameCountdown();
 });
 
 socket.on('stealOffer', ({ player }) => {

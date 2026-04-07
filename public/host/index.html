@@ -70,7 +70,6 @@
           <button onclick="submitAnswer(3)" class="btn btn-answer" id="btn-d"><span class="answer-key">D</span><span class="answer-val" id="ans-text-3">—</span></button>
         </div>
 
-        <button onclick="endRound()" class="btn btn-sm" style="margin-top: 12px; opacity: 0.6;">⏹ Runde abbrechen</button>
       </div>
 
       <!-- Steal controls -->
@@ -89,8 +88,7 @@
       <div id="result-display" class="hidden">
         <div id="result-message" class="result-message">—</div>
         <div class="btn-row" style="margin-top: 12px;">
-          <button onclick="nextRound()" class="btn btn-big btn-accent">▶ NÄCHSTE RUNDE</button>
-          <button onclick="endRound()" class="btn">📊 Scoreboard</button>
+          <span class="auto-hint">Auto-Advance zur nächsten Runde...</span>
         </div>
       </div>
     </section>

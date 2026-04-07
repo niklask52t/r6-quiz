@@ -1615,6 +1615,7 @@ body {
   z-index: 50;
   text-align: center;
   animation: bannerPop 0.5s ease-out;
+  max-width: 90%;
 }
 
 .result-banner-text {
@@ -1622,6 +1623,9 @@ body {
   font-size: 120px;
   font-weight: 700;
   letter-spacing: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .result-banner-sub {
@@ -1630,6 +1634,9 @@ body {
   font-weight: 600;
   letter-spacing: 4px;
   margin-top: -10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .banner-correct .result-banner-text {
@@ -1963,6 +1970,10 @@ body {
   font-weight: 600;
   letter-spacing: 4px;
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .podium-player-score {
@@ -2012,12 +2023,17 @@ body {
 
 .winner-banner-text {
   font-family: 'Teko', sans-serif;
-  font-size: 110px;
+  font-size: clamp(60px, 6vw, 110px);
   font-weight: 700;
-  letter-spacing: 16px;
+  letter-spacing: 12px;
   color: var(--accent);
   text-shadow: 0 0 60px var(--accent-glow), 0 0 120px rgba(255,102,0,0.5);
   animation: bannerGlow 2s ease-in-out infinite 1s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  padding: 0 40px;
 }
 
 @keyframes bannerGlow {

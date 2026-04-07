@@ -411,6 +411,15 @@ label {
   color: var(--text);
 }
 
+.auto-hint {
+  color: var(--text-dim);
+  font-size: 16px;
+  font-style: italic;
+  display: block;
+  text-align: center;
+  padding: 8px 0;
+}
+
 /* ---- DETAILS/SUMMARY ---- */
 details.panel summary {
   cursor: pointer;

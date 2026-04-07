@@ -2,6 +2,7 @@ const socket = io();
 
 let currentScreen = 'intro';
 let timerDuration = 60;
+let isAnimating5050 = false;
 
 // =============================================
 // FX ENGINE — Global particle/flash system
@@ -199,6 +200,12 @@ function renderQuestion(state, prefix) {
   boxes.forEach((box, idx) => {
     const textEl = box.querySelector('.answer-text');
     textEl.textContent = state.currentQuestion.answers[idx] || '';
+
+    // During 50/50 animation, don't reset classes on hidden answers
+    if (isAnimating5050 && state.hiddenAnswers && state.hiddenAnswers.includes(idx)) {
+      return;
+    }
+
     box.className = 'answer-box';
     box.style.animationDelay = `${idx * 0.1}s`;
 
@@ -741,10 +748,12 @@ function showJokerPopup(text, colorClass) {
 
 function animateJoker5050(hiddenAnswers) {
   const grid = document.getElementById('answers-grid');
+  isAnimating5050 = true;
   showJokerPopup('50 / 50', 'pop-5050');
   screenFlash('rgba(255,102,0,0.2)');
   spawnGlitchLines();
 
+  const totalDuration = (hiddenAnswers.length - 1) * 300 + 400 + 100;
   hiddenAnswers.forEach((idx, i) => {
     setTimeout(() => {
       const box = grid.querySelector(`[data-idx="${idx}"]`);
@@ -759,6 +768,8 @@ function animateJoker5050(hiddenAnswers) {
       }
     }, i * 300);
   });
+
+  setTimeout(() => { isAnimating5050 = false; }, totalDuration);
 }
 
 function animateJokerSkip() {

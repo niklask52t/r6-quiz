@@ -371,6 +371,20 @@ function saveSettings() {
   socket.emit('updateSettings', s);
 }
 
+// Auto-save settings on change (debounced)
+let settingsSaveTimer = null;
+function autoSaveSettings() {
+  if (settingsSaveTimer) clearTimeout(settingsSaveTimer);
+  settingsSaveTimer = setTimeout(() => saveSettings(), 300);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.settings-grid input').forEach(el => {
+    el.addEventListener('input', autoSaveSettings);
+    el.addEventListener('change', autoSaveSettings);
+  });
+});
+
 // ---- HISTORY LOG ----
 function addHistoryEntry(text, className, specialType) {
   const log = document.getElementById('history-log');
@@ -401,17 +415,18 @@ function updateAutoButton() {
   const newRoundBtn = document.getElementById('btn-new-round');
   const s = gameState.settings || {};
   const allPlayed = gameState.players.length > 0 && gameState.players.every(p => p.playCount >= s.totalRounds);
-  // Only show finale button when game is actually over (idle/scoreboard), not while a question is still active
   const isActive = ['answering', 'playerSelect', 'specialIntro', 'countdown', 'stealing'].includes(gameState.phase);
   const showFinale = (allPlayed && !isActive) || gameState.gameOver;
 
   if (showFinale) {
-    btn.textContent = '🏆 ERGEBNISSE ANZEIGEN';
-    btn.className = 'btn btn-big btn-green';
-    if (newRoundBtn) newRoundBtn.style.display = '';
-  } else {
-    btn.textContent = '▶ NÄCHSTE RUNDE';
+    btn.textContent = '🔄 Neue Runde';
     btn.className = 'btn btn-big btn-accent';
+    btn.onclick = () => newRoundStart();
+    if (newRoundBtn) newRoundBtn.style.display = 'none';
+  } else {
+    btn.textContent = 'Auto-Advance aktiv...';
+    btn.className = 'btn btn-big btn-accent';
+    btn.disabled = true;
     if (newRoundBtn) newRoundBtn.style.display = 'none';
   }
 }
@@ -429,13 +444,11 @@ function updateResultButtons() {
 
   if (gameOver) {
     btnRow.innerHTML = `
-      <button onclick="nextRound()" class="btn btn-big btn-green">🏆 ERGEBNISSE ANZEIGEN</button>
-      <button onclick="newRoundStart()" class="btn btn-accent">🔄 Neue Runde starten</button>
+      <span class="auto-hint">Auto-Advance zur Siegerehrung...</span>
     `;
   } else {
     btnRow.innerHTML = `
-      <button onclick="nextRound()" class="btn btn-big btn-accent">▶ NÄCHSTE RUNDE</button>
-      <button onclick="endRound()" class="btn">📊 Scoreboard</button>
+      <span class="auto-hint">Auto-Advance zur nächsten Runde...</span>
     `;
   }
 }

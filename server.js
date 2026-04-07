@@ -180,20 +180,19 @@ function handleTimeout() {
 function autoAdvance(gameOver) {
   setTimeout(() => {
     if (gameState.phase === 'revealed' || gameState.phase === 'stealing') {
-      gameState.screen = 'scoreboard';
       gameState.phase = 'idle';
       gameState.specialType = null;
       gameState.stealActive = false;
       gameState.stealPlayer = null;
-      io.emit('stateUpdate', sanitizeState());
 
       if (gameOver) {
+        // Skip scoreboard — go directly to finale
         gameState.gameOver = true;
-        setTimeout(() => {
-          gameState.screen = 'finale';
-          io.emit('stateUpdate', sanitizeState());
-        }, 4000);
+        gameState.screen = 'finale';
+        io.emit('stateUpdate', sanitizeState());
       } else {
+        gameState.screen = 'scoreboard';
+        io.emit('stateUpdate', sanitizeState());
         // Auto-advance to next round after showing scoreboard
         setTimeout(() => {
           if (gameState.phase === 'idle' && gameState.screen === 'scoreboard') {
